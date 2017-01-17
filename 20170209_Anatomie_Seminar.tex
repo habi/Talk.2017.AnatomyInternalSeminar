@@ -6,13 +6,14 @@
 \usepackage{microtype}
 \usepackage{textcomp}
 \usepackage[backend=biber,natbib=true, sorting=none, url=false]{biblatex}
-\addbibresource{~/Documents/library.bib}
+\addbibresource{../Documents/library.bib}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage[detect-all=true]{siunitx}
 \usepackage{csquotes}
 \usepackage{animate}
 \usepackage{booktabs}
+\usepackage{media9}
 \usepackage[absolute,overlay]{textpos} %for the \source{} command
 \usepackage{gitinfo2}
 \usepackage{hyperref}
@@ -25,66 +26,97 @@
 \newlength\imagewidth % needed for scalebars
 \newlength\imagescale % ditto
 
-\subtitle{Bruker microCT SkyScan 1172 \& 1272}
-\author{David Haberthür}
+\subtitle{Brain and lung imaging as examples}
+\author[DH]{David Haberthür}
 \institute{Institute of Anatomy\\Universität Bern}
-\date{19. August 2016\\Meeting mit Klaus Weber (Anapath)}
+\date{February 9, 2017\\Internal seminar\\Version~\gitAbbrevHash}
+
+\useoutertheme{split}
 
 \begin{document}
-\title{Was können unsere \si{\micro}CT-Maschinen?} % http://tex.stackexchange.com/a/144445/828
+\title[\si{\micro}CT imaging at ana.unibe.ch]{\si{\micro}CT-imaging at the Institute of Anatomy} % http://tex.stackexchange.com/a/144445/828
 
+\defbeamertemplate{footline}{unibe}
+{%
+	\usebeamercolor[fg]{page number in head/foot}%
+	\usebeamerfont{page number in head/foot}%
+	\hspace*{\fill}%
+	\insertauthor%
+	\hspace*{\fill}%|\hspace*{\fill}%
+	\insertshorttitle%
+	\hspace*{\fill}%|\hspace*{\fill}%
+	v.~\gitAbbrevHash%
+	\hspace*{\fill}%|\hspace*{\fill}%
+	\insertpagenumber\,/\,\insertpresentationendpage%
+	\hspace*{\fill}%
+	\vskip2pt%
+}
+\setbeamertemplate{footline}[unibe]
+
+{
+\setbeamertemplate{footline}{} % http://tex.stackexchange.com/a/18829/828
 \begin{frame}
-	\maketitle
+  \titlepage
+\end{frame}
+}
+\addtocounter{framenumber}{1}
+
+\begin{frame}{Overview}
+	\tableofcontents
 \end{frame}
 
-\begin{frame}
-	\frametitle{Tumor load in lungs}
+\begin{frame}{Theory}
+\end{frame}
+
+\begin{frame}{Machines}
 	\begin{itemize}
-		\item Collaboration with DKF
-		\item KP-TNIK influences tumor load
-		\item Critical point dried lungs		
+		\item two uct
+		\item 3d printer
+		\item two people
 	\end{itemize}
 \end{frame}
 
-\end{document}
-
-\begin{frame}
-	\frametitle{Tumor load in lungs}
-	\animategraphics[palindrome,width=325]{12}{../../Documents/Collaborations/DKF_Lung/movieframes/out-}{001}{255}
-\end{frame}
-
-\end{document}
-\begin{frame}
-	\renewcommand{\imsize}{0.33\linewidth}	
-	\frametitle{Tumor load in lungs | Top: KO, bottom: WT}	
-	\centering
-	\includegraphics[width=\imsize]{../../Documents/Collaborations/DKF_Lung/Overview/MAX_--11.png}%
-	\includegraphics[width=\imsize]{../../Documents/Collaborations/DKF_Lung/Overview/MAX_--12.png}%
-	\includegraphics[width=\imsize]{../../Documents/Collaborations/DKF_Lung/Overview/MAX_--13.png}\\%
-	\includegraphics[width=\imsize]{../../Documents/Collaborations/DKF_Lung/Overview/MAX_wt11.png}%
-	\includegraphics[width=\imsize]{../../Documents/Collaborations/DKF_Lung/Overview/MAX_wt12.png}%
-	\includegraphics[width=\imsize]{../../Documents/Collaborations/DKF_Lung/Overview/MAX_wt13.png}%
-\end{frame}
-
-\begin{frame}
-	\frametitle{Tumor metastasis\\Overview scan (\SI{20}{\micro\meter} voxel size)}
-	\centering
-	\animategraphics[palindrome,width=275]{12}{img/tumor/mouse_tumor_rec0}{001}{263}
-\end{frame}
-
-\begin{frame}
-	\renewcommand{\imsize}{\linewidth}	
-	\frametitle{Tumor metastasis\\Reconstruction (\SI{3}{\micro\meter} voxel size)}	
+\begin{frame}{Machines}	
+	\renewcommand{\imsize}{0.618\linewidth}
 	\centering	
-	\pgfmathsetlength{\imagewidth}{\imsize}%
-	\pgfmathsetlength{\imagescale}{\imagewidth/4904}%
-	\def\x{3031}% scalebar-x starting at golden ratio of image width of 4904px = 3031
-	\def\y{2140}% scalebar-y at 90% of image height of 2378px = 2140
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/{{KP-TNIPWT13_rec00004162}}}};
-		% 4904px = 14.712mm > 100px = 300um > 167px = 500um, 33px = 100um
-		\draw[|-|,white,thick] (\x,\y) -- (\x+167+167,\y) node [midway,above] {\SI{1}{\milli\meter}};
-	\end{tikzpicture}%
+	\vfill
+	\includegraphics[width=\imsize]{img/1272}
+	\vfill
+	\includegraphics[width=\imsize]{img/1172}
 \end{frame}
 
-\end{document}
+\begin{frame}{Examples}
+	\begin{itemize}
+		\item Zebrafish
+		\item Spider
+		\item Lung tumors
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Danio rerio}
+\centering
+\includegraphics[width=\imsize]{img/{{zebrafish_rec_voi_top_right}}}
+%\begin{figure}%
+%    \centering%
+%    \pgfmathsetlength{\imagewidth}{\imsize}%
+%    \pgfmathsetlength{\imagescale}{\imagewidth/1651}%
+%    \def\x{1020}% scalebar-x starting at golden ratio of image width of 1651px = 1020
+%    \def\y{391}% scalebar-y at 90% of image height of 434px = 391
+%    \begin{tikzpicture}[x=\imagescale,y=-\imagescale]%
+%        \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/{{zebrafish_rec_voi_top_right}}}};
+%        % 1615px = 35.48 > 100px = 2198um > 23px = 500um, 5px = 100um
+%        %\draw[|-|,blue,thick] (20,154) -- (1634,127) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{35.487480000000005}{\milli\meter} (1615px) TEMPORARY!};
+%        \draw[|-|,ultra thick] (\x,\y) -- (\x+234.19,\y) node [midway,above] {\SI{5}{\milli\meter}};
+%    \end{tikzpicture}%
+%    \caption{Visualization of a tomographic scan of a zebrafish, fixed in \SI{4}{\percent} PFA.}%
+%\end{figure}%
+\end{frame}
+
+\begin{frame}
+	\centering
+	 \includemedia[activate=onclick,width=0.75\textwidth]{\includegraphics{Pic.png}}{mov/spinnele.mp4}
+
+\end{frame}
+
+\end{document} 
