@@ -5,15 +5,16 @@
 \usepackage[english]{babel}
 \usepackage{microtype}
 \usepackage{textcomp}
-\usepackage[backend=biber,natbib=true, sorting=none, url=false]{biblatex}
-\addbibresource{../Documents/library.bib}
+\usepackage[backend=biber, style=alphabetic, url=false]{biblatex}
+\addbibresource{../../Documents/library.bib}
 \usepackage{graphicx}
+\usepackage{caption}
+    \captionsetup[figure]{labelformat=empty} % No 'figure' in figures
 \usepackage{tikz}
 \usepackage[detect-all=true]{siunitx}
 \usepackage{csquotes}
 \usepackage{animate}
 \usepackage{booktabs}
-\usepackage{media9}
 \usepackage[absolute,overlay]{textpos} %for the \source{} command
 \usepackage{gitinfo2}
 \usepackage{hyperref}
@@ -25,6 +26,35 @@
 \newcommand{\imsize}{\linewidth}
 \newlength\imagewidth % needed for scalebars
 \newlength\imagescale % ditto
+\newcommand{\uct}{\si{micro}CT}
+
+\newcommand{\source}[1]{%http://tex.stackexchange.com/a/48485/828
+    \begin{textblock*}{4cm}(8.7cm,8.6cm)%
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}%
+    \tiny\usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}%
+    \end{beamercolorbox}%
+    \end{textblock*}%
+}
+
+% Biblatex: http://tex.stackexchange.com/a/13076/828
+% % Format bibliography for beamer
+% % http://tex.stackexchange.com/a/10686/828
+% \renewbibmacro{in:}{}
+% % http://tex.stackexchange.com/a/13076/828
+% \AtEveryBibitem{\clearfield{title}}
+% \AtEveryBibitem{\clearfield{journaltitle}}
+% \AtEveryBibitem{\clearfield{year}}
+% \AtEveryBibitem{\clearfield{pages}}
+% \AtEveryBibitem{\clearfield{volume}}
+% \AtEveryBibitem{\clearfield{number}}
+% %http://tex.stackexchange.com/a/40710/828
+% \usepackage{xpatch}
+% \xpatchbibmacro{month}{%
+%   \printtext[parens]%
+% }{%
+%   \setunit*{\addperiod\space}%
+%   \printtext%
+% }{}{} 
 
 \subtitle{Brain and lung imaging as examples}
 \author[DH]{David Haberthür}
@@ -61,20 +91,65 @@
 }
 \addtocounter{framenumber}{1}
 
-\begin{frame}{Overview}
+\begin{frame}{Contents}
 	\tableofcontents
 \end{frame}
 
-\begin{frame}{Theory}
+\section{Overview}
+\begin{frame}{Backstory}
+    \begin{itemize}
+        \item Lung fibrosis grading \cite{Ashcroft1988a}
+        \item \emph{Correct} sampling for proper assessment
+        \item \uct is a tool to help grade fibrosis
+        \begin{itemize}
+            \item Detect and grade fibrosis
+            \item Get indications where to perform the sampling
+        \end{itemize}
+        \item Cancer metastasis (\SI{2}{year} after radiation treatment fibrosis is induced)
+        \item Cancer treatment
+        \begin{itemize}
+            \item Antiangiogenesis (failed)
+            \item Radiation therapy, namely MRT \cite{Bronnimann2016} (probably better citation needed)!
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Machines}
-	\begin{itemize}
-		\item two uct
-		\item 3d printer
-		\item two people
-	\end{itemize}
+\begin{frame}{Stories}
+    \begin{itemize}
+        \item  Overview of metastatis (Ochsenbein sample)
+        \item Fibrosis grading (3View/uCT)
+        \item Grenoble brains, assessing different parameters `easily'.
+    \end{itemize}
 \end{frame}
+
+%\section{\uct}
+\begin{frame}{Theory}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.5\linewidth]{img/CT_PRINCI_PB}
+    \caption{Parallel beam CT.
+        (1) = an object
+        (2) = the parallel beam light source
+        (3) = the screen
+        (4) = transmission beam
+        (5) = the datum circle
+        (6) = the origin
+        (7) = a one-dimensional fluoroscopic image}
+    \end{figure}    
+    \source{\href{https://commons.wikimedia.org/wiki/File:CT_PRINCI_PB.jpg}{enwp.org/tomography}}
+\end{frame}
+
+\section{Assessing metastasis load in lungs}
+\begin{frame}{Lung metastasis}
+    Show slide from anapath talk
+\end{frame}
+
+\begin{frame}{References}
+    \renewcommand*{\bibfont}{\tiny}
+    \printbibliography
+\end{frame}
+
+\end{document}
 
 \begin{frame}{Machines}	
 	\renewcommand{\imsize}{0.618\linewidth}
@@ -92,7 +167,6 @@
 		\item Lung tumors
 	\end{itemize}
 \end{frame}
-
 
 \begin{frame}{Danio rerio}
 \centering
@@ -115,8 +189,8 @@
 
 \begin{frame}
 	\centering
-	 \includemedia[activate=onclick,width=0.75\textwidth]{\includegraphics{Pic.png}}{mov/spinnele.mp4}
-
+	Examples
+	 
 \end{frame}
 
 \end{document} 
