@@ -1,6 +1,8 @@
 \documentclass[draft,caption=numbered]{beamer}
 \usetheme[color=screen]{UniBern}
 
+%\setbeameroption{show notes}
+
 \usepackage{lmodern}
 \usepackage[english]{babel}
 \usepackage{microtype}
@@ -60,9 +62,9 @@
 % }{}{} 
 
 \subtitle{Several examples as well as details in lung and brain imaging}
-\author[DH]{David Haberthür}
+\author[David Haberthür]{David Haberthür \and\tiny Adolfo Odriozola \and Ruslan Hlushchuk \and Valentin Djonov}
 \institute{Institute of Anatomy\\Universität Bern}
-\date{February 9, 2017\\Internal seminar\\Version~\gitAbbrevHash}
+\date{February 9, 2017\\Internal seminar@Institute of Anatomy}
 
 %\useoutertheme{split}
 
@@ -74,13 +76,13 @@
 	\usebeamercolor[fg]{page number in head/foot}%
 	\usebeamerfont{page number in head/foot}%
 	\hspace*{\fill}%
-	\insertauthor%
+	\insertshortauthor%
 	\hspace*{\fill}%|\hspace*{\fill}%
 	\insertshorttitle%
 	\hspace*{\fill}%|\hspace*{\fill}%
 	v.~\gitAbbrevHash%
 	\hspace*{\fill}%|\hspace*{\fill}%
-	\insertpagenumber\,/\,\insertpresentationendpage%
+	\insertframenumber\,/\,\insertpresentationendpage%
 	\hspace*{\fill}%
 	\vskip2pt%
 }
@@ -128,7 +130,6 @@
 \section{(\si{\micro})CT}
 \renewcommand{\imsize}{0.618\linewidth}
 \begin{frame}{CT in theory}
-    \centering
     \begin{figure}[h]
     \includegraphics[width=\imsize]{img/CT_PRINCI_PB}
     \caption[CT]{Parallel beam CT.\\
@@ -147,7 +148,6 @@
 \begin{frame}{Zebrafish}
     \renewcommand{\imsize}{\linewidth}%
     \begin{figure}%
-        \centering%
         \pgfmathsetlength{\imagewidth}{\imsize}%
         \pgfmathsetlength{\imagescale}{\imagewidth/1651}%
         \def\x{1020}% scalebar-x starting at golden ratio of image width of 1651px = 1020
@@ -163,9 +163,8 @@
 \end{frame}
 
 \begin{frame}{Rat head}
-    \renewcommand{\imsize}{\linewidth}%
+    \renewcommand{\imsize}{0.9\linewidth}%
     \begin{figure}%
-        \centering%
         \pgfmathsetlength{\imagewidth}{\imsize}%
         \pgfmathsetlength{\imagescale}{\imagewidth/1400}%
         \def\x{865}% scalebar-x starting at golden ratio of image width of 1400px = 865
@@ -186,8 +185,8 @@
 \end{frame}
 
 \begin{frame}{Rat brain vessels}
-will be important later on with Grenoble brains
-\centering
+	\renewcommand{\imsize}{0.7\linewidth}%
+    \begin{figure}%
         \pgfmathsetlength{\imagewidth}{\imsize}%
         \pgfmathsetlength{\imagescale}{\imagewidth/1950}%
         \def\x{1205}% scalebar-x starting at golden ratio of image width of 1950px = 1205
@@ -196,7 +195,7 @@ will be important later on with Grenoble brains
             \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/Ebene_25}};
             % 1949px = 20.0mm > 100px = 1026um > 49px = 500um, 10px = 100um
             %\draw[|-|,blue,thick] (39,1222) -- (1722,239) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{20.0}{\milli\meter} (1949px) TEMPORARY!};
-            \draw[|-|, thick] (\x,\y) -- (\x+97,\y) node [midway,above] {\SI{1}{\milli\meter}};
+            \draw[|-| ] (\x,\y) -- (\x+97,\y) node [midway,above] {\SI{1}{\milli\meter}};
             \node [anchor=center] (cb) at (2200,300) {Cerebellum};
             \draw [thick] (cb.west) to [out=-180, in=0] (1482,144);
             \node [anchor=center] (bs) at (2200,500) {Brain stem};
@@ -205,32 +204,37 @@ will be important later on with Grenoble brains
             \draw [thick] (ob.north) to [out=90, in=180] (210,880);
             \draw [thick] (ob.north) to [out=90, in=180] (298,1116);
         \end{tikzpicture}
+        \caption{Visualization of a tomographic scan of a \uaf-filled mouse brain. Will be important later on with \emph{Grenoble} brains.}%
+    \end{figure}%       
 \end{frame}
 
 \section{Assessing tumor/metastasis load in lungs}
-\begin{frame}{Tumor metastasis, Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
-Stereology
+\begin{frame}{Tumor metastasis}
+	\begin{itemize}
+		\item Assessing tumor load in lungs
+		\item KP-TNIK mice
+		\item Stereology
+	\end{itemize}
 \end{frame}
 
-\renewcommand{\imsize}{0.28\linewidth}  
-\begin{frame}{Tumor metastasis, Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
-    \centering  
+\renewcommand{\imsize}{0.27\linewidth}  
+\begin{frame}{Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
     \pgfmathsetlength{\imagewidth}{\imsize}%
     \pgfmathsetlength{\imagescale}{\imagewidth/800}%
     \def\x{494}% scalebar-x starting at golden ratio of image width of 800px = 494
     \def\y{720}% scalebar-y at 90% of image height of 800px = 720
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, spy using outlines={rectangle, magnification=\mag, size=\size, connect spies}]
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_--11}}}};
 		% 800px = 16.0mm > 100px = 2000um > 25px = 500um, 5px = 100um
 		%\draw[|-|,blue,thick] (0,400) -- (800,400) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{16.0}{\milli\meter} (800px) TEMPORARY!};
 		\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 	\end{tikzpicture}%
-	\hfill
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, spy using outlines={rectangle, magnification=\mag, size=\size, connect spies}]
+	\hfill%
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_--12}}}};
 		\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 	\end{tikzpicture}%
-	\hfill
+	\hfill%
 	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_--13}}}};
 		\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
@@ -251,20 +255,60 @@ Stereology
 	\end{tikzpicture}%
 \end{frame}
 
-\begin{frame}{Tumor metastasis, Overview scan with \SI{20}{\micro\meter} pixel size}
-    \centering
-	
-	
+\begin{frame}{Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
+	\renewcommand{\imsize}{\linewidth}  
+	\animategraphics[palindrome,width=\imsize]{12}{../../Documents/Collaborations/DKF_Lung/movieframes/out-}{001}{255}
+\end{frame}
+
+\section{Multimodal imaging: \uct and 3View, correlated}
+\begin{frame}{Overview scan with \SI{20}{\micro\meter} pixel size}
+    \renewcommand{\imsize}{0.5\linewidth}  
 	\pgfmathsetlength{\imagewidth}{\imsize}%
-	\pgfmathsetlength{\imagescale}{\imagewidth/800}%
-	\def\x{494}% scalebar-x starting at golden ratio of image width of 800px = 494
-	\def\y{720}% scalebar-y at 90% of image height
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-	\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[palindrome, width=0.5\linewidth]{12}{./img/tumor/mouse_tumor_rec0}{001}{263}};
-	\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
-	\end{tikzpicture}%	
-	
-	
+	\pgfmathsetlength{\imagescale}{\imagewidth/864}%
+	\def\x{534}% scalebar-x starting at golden ratio of image width of 864px = 534
+	\def\y{723}% scalebar-y at 90% of image height of 803px = 723
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, spy using outlines={rectangle, magnification=\mag, size=\size, connect spies}]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {
+			\animategraphics[palindrome, width=\imsize]{24}{./img/movie_tumor_20um/image}{3503}{4037}
+			};
+		% 592px = 19.723mm > 100px = 3331um > 15px = 500um, 3px = 100um
+		%\draw[|-|,blue,thick] (194,615) -- (685,284) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{19.723}{\milli\meter} (592px) TEMPORARY!};
+		\draw[|-|] (\x,\y) -- (\x+300,\y) node [midway,above] {\SI{1}{\centi\meter}};
+		%\draw[color=red, anchor=south west] (0,803) node [fill=white, semitransparent] {Legend} node {Legend};
+	\end{tikzpicture}%
+\end{frame}
+
+\begin{frame}{Overview, Detail and 3View}
+	\renewcommand{\imsize}{0.25\linewidth}
+	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/Mouse_Tumor_IR_rec00001610_scalebar}
+	\pause
+	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/uct_Cube_scalebar}
+	\pause
+	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Overview_scalebar.jpg}
+	\pause
+	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Detail_scalebar.jpg}	
+	\note{%
+		\begin{itemize}
+			\item 3View
+			\begin{itemize}
+				\item Slice 297/500 from each of the datasets (ROI00 and ROI01)
+				\item Manually registered with 6 points and Plugins > Registration > Moving least squares
+				\item Saved on anadata/djonov > uct > Mouse\_Lung\_Metastasis > Valentin
+			\end{itemize}
+			\item \uct
+				\begin{itemize}
+					\item Mouse\_Tumor\_Cube
+					\item Mouse\_Tumor\_Cube\_rec00002639 registered with slice 297 of 3View\_Registration.tif
+				\end{itemize}
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}{Overview, Detail and 3View}
+	\renewcommand{\imsize}{0.5\linewidth}
+	\includegraphics<1>[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Overview_scalebar}
+	\includegraphics<2>[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Registration_scalebar}
+	\includegraphics<3>[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/uCT_Cube_with_3View_Registration_Average_scalebar.jpg}
 \end{frame}
 
 \section{Brain tumors}
@@ -282,19 +326,28 @@ Stereology
     \end{itemize}
 \end{frame}
 
+\renewcommand{\imsize}{0.9\linewidth}	
 \begin{frame}{vessel volume ratio}
-    \centering
     \includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_ratio_violin}
 \end{frame}
 
 \begin{frame}{vessel surface}
-    \centering
     \includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_surface_per_tumor_volume}
 \end{frame}
 
 \begin{frame}{imd}
-    \centering
-    \includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/imd}
+    \includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/slice_imd}
+\end{frame}
+
+\begin{frame}{Thanks}
+	\begin{itemize}
+		\item Topographic and clinical Anatomy
+		\item SNF
+		\pause
+		\item You, for listening
+		\pause
+		\item Questions?
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{References}
