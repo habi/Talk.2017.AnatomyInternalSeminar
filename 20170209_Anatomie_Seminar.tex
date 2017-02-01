@@ -1,4 +1,4 @@
-\documentclass[draft,caption=numbered]{beamer}
+\documentclass[caption=numbered]{beamer}
 \usetheme[color=screen]{UniBern}
 
 %\setbeameroption{show notes}
@@ -14,13 +14,16 @@
     \captionsetup[figure]{labelformat=empty} % No 'figure' in figures
 \usepackage{tikz}
 	\usetikzlibrary{spy}
-\usepackage[detect-all=true]{siunitx}
+\usepackage[detect-all=true, range-phrase=--, range-units=single]{siunitx}
 \usepackage{csquotes}
 \usepackage{animate}
+\usepackage{sparklines}
 \usepackage{booktabs}
 \usepackage[absolute,overlay]{textpos} %for the \source{} command
 \usepackage{gitinfo2}
 \usepackage{xspace}
+\usepackage{todonotes}
+	\presetkeys{todonotes}{inline}{} % http://tex.stackexchange.com/a/12331/828
 \usepackage{hyperref}
 
 \hypersetup{pdfstartview={Fit}}
@@ -34,11 +37,11 @@
 \newcommand{\uaf}{\si{\micro}AngioFil\xspace}
 
 \newcommand{\source}[1]{%http://tex.stackexchange.com/a/48485/828
-    \begin{textblock*}{4cm}(8.7cm,8.6cm)%
-    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}%
-    \tiny\usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}%
-    \end{beamercolorbox}%
-    \end{textblock*}%
+	\begin{textblock*}{4cm}(8.7cm,8.6cm)%
+	\begin{beamercolorbox}[ht=0.5cm,right]{framesource}%
+	\tiny\usebeamerfont{framesource}\usebeamercolor[fg]{framesource}Source: {#1}%
+	\end{beamercolorbox}%
+	\end{textblock*}%
 }
 
 % Biblatex: http://tex.stackexchange.com/a/13076/828
@@ -127,21 +130,26 @@
     \end{itemize}
 \end{frame}
 
-\section{(\si{\micro})CT}
-\renewcommand{\imsize}{0.618\linewidth}
-\begin{frame}{CT in theory}
-    \begin{figure}[h]
-    \includegraphics[width=\imsize]{img/CT_PRINCI_PB}
-    \caption[CT]{Parallel beam CT.\\
-        1: Object
-        2: Parallel beam light source
-        3: Screen
-        4: Transmitted beam\\
-        5: Datum circle
-        6: Origin
-        7: 1D image}
-    \end{figure}
-    \source{\href{https://commons.wikimedia.org/wiki/File:CT_PRINCI_PB.jpg}{enwp.org/tomography}}
+%\section{(\si{\micro})CT}
+%\renewcommand{\imsize}{0.618\linewidth}
+\begin{frame}{Theory computed tomography}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+		    \includegraphics[width=\imsize]{img/CT_PRINCI_PB}
+			\source{\href{https://commons.wikimedia.org/wiki/File:CT_PRINCI_PB.jpg}{enwp.org/tomography}}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\begin{enumerate}
+				\item Object
+				\item Parallel beam light source
+				\item Screen
+				\item Transmitted beam
+				\item Datum circle
+				\item Origin
+				\item 1D image			
+			\end{enumerate}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \section{Several examples}
@@ -181,31 +189,50 @@
     \end{figure}%
 \end{frame}
 
-\begin{frame}{Spider}
-\end{frame}
+%\begin{frame}{Spider}
+%	\renewcommand{\imsize}{0.75\linewidth}%
+%	\pgfmathsetlength{\imagewidth}{\imsize}%
+%	\pgfmathsetlength{\imagescale}{\imagewidth/1592}%
+%	\def\x{984}% scalebar-x starting at golden ratio of image width of 1592px = 984
+%	\def\y{975}% scalebar-y at 90% of image height of 1083px = 975
+%	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+%		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {
+%			\animategraphics[palindrome,width=\imsize]{12}{img/movie_spider_7um/image}{0800}{0900}
+%			};
+%		% 719px = 23.6775mm > 100px = 3291um > 15px = 500um, 3px = 100um
+%		%\draw[|-|,blue,thick] (449,551) -- (1168,525) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{23.6775}{\milli\meter} (719px) TEMPORARY!};
+%		\draw[|-|] (\x,\y) -- (\x+304,\y) node [midway,above] {\SI{1}{\centi\meter}};
+%	\end{tikzpicture}%
+%\end{frame}
 
 \begin{frame}{Rat brain vessels}
-	\renewcommand{\imsize}{0.7\linewidth}%
-    \begin{figure}%
-        \pgfmathsetlength{\imagewidth}{\imsize}%
-        \pgfmathsetlength{\imagescale}{\imagewidth/1950}%
-        \def\x{1205}% scalebar-x starting at golden ratio of image width of 1950px = 1205
-        \def\y{1230}% scalebar-y at 90% of image height of 1367px = 1230
-        \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-            \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/Ebene_25}};
-            % 1949px = 20.0mm > 100px = 1026um > 49px = 500um, 10px = 100um
-            %\draw[|-|,blue,thick] (39,1222) -- (1722,239) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{20.0}{\milli\meter} (1949px) TEMPORARY!};
-            \draw[|-| ] (\x,\y) -- (\x+97,\y) node [midway,above] {\SI{1}{\milli\meter}};
-            \node [anchor=center] (cb) at (2200,300) {Cerebellum};
-            \draw [thick] (cb.west) to [out=-180, in=0] (1482,144);
-            \node [anchor=center] (bs) at (2200,500) {Brain stem};
-            \draw [thick] (bs.south) to [out=-90, in=-45] (1705,725);
-            \node [anchor=center, text width=2cm, align=center] (ob) at (-150,1200) {Olfactory bulbs};
-            \draw [thick] (ob.north) to [out=90, in=180] (210,880);
-            \draw [thick] (ob.north) to [out=90, in=180] (298,1116);
-        \end{tikzpicture}
-        \caption{Visualization of a tomographic scan of a \uaf-filled mouse brain. Will be important later on with \emph{Grenoble} brains.}%
-    \end{figure}%       
+	\renewcommand{\imsize}{\linewidth}%
+	\begin{columns}
+		\begin{column}{0.618\linewidth}
+			\pgfmathsetlength{\imagewidth}{\imsize}%
+			\pgfmathsetlength{\imagescale}{\imagewidth/1950}%
+			\def\x{1205}% scalebar-x starting at golden ratio of image width of 1950px = 1205
+			\def\y{1230}% scalebar-y at 90% of image height of 1367px = 1230
+			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+				\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/Ebene_25}};
+				% 1949px = 20.0mm > 100px = 1026um > 49px = 500um, 10px = 100um
+				%\draw[|-|,blue,thick] (39,1222) -- (1722,239) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{20.0}{\milli\meter} (1949px) TEMPORARY!};
+				\draw[|-| ] (\x,\y) -- (\x+490,\y) node [midway,above] {\SI{5}{\milli\meter}};
+				\node [anchor=center] (cb) at (2000,-50) {Cerebellum};
+				\draw [thick] (cb.west) to [out=-180, in=0] (1482,144);
+				\node [anchor=center] (bs) at (2250,1500) {Brain stem};
+				\draw [thick] (bs.west) to [out=180, in=-45] (1705,725);
+				\node [anchor=center, text width=2cm, align=center] (ob) at (550,1500) {Olfactory bulbs};
+				\draw [thick] (ob.west) to [out=180, in=180] (210,880);
+				\draw [thick] (ob.west) to [out=180, in=180] (298,1116);
+			\end{tikzpicture}
+		\end{column}		
+		\begin{column}{0.382\linewidth}
+			Visualization of a tomographic scan of a \uaf-filled mouse brain.
+			\pause
+			Will be important later on, with the \emph{Brain tumors}.
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \section{Assessing tumor/metastasis load in lungs}
@@ -255,28 +282,42 @@
 	\end{tikzpicture}%
 \end{frame}
 
-\begin{frame}{Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
-	\renewcommand{\imsize}{\linewidth}  
-	\animategraphics[palindrome,width=\imsize]{12}{../../Documents/Collaborations/DKF_Lung/movieframes/out-}{001}{255}
-\end{frame}
+%\begin{frame}{Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
+%	\renewcommand{\imsize}{0.9\linewidth}  
+%	\animategraphics[palindrome,width=\imsize]{12}{../../Documents/Collaborations/DKF_Lung/movieframes/out-}{001}{255}
+%\end{frame}
 
 \section{Multimodal imaging: \uct and 3View, correlated}
-\begin{frame}{Overview scan with \SI{20}{\micro\meter} pixel size}
-    \renewcommand{\imsize}{0.5\linewidth}  
-	\pgfmathsetlength{\imagewidth}{\imsize}%
-	\pgfmathsetlength{\imagescale}{\imagewidth/864}%
-	\def\x{534}% scalebar-x starting at golden ratio of image width of 864px = 534
-	\def\y{723}% scalebar-y at 90% of image height of 803px = 723
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, spy using outlines={rectangle, magnification=\mag, size=\size, connect spies}]
-		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {
-			\animategraphics[palindrome, width=\imsize]{24}{./img/movie_tumor_20um/image}{3503}{4037}
-			};
-		% 592px = 19.723mm > 100px = 3331um > 15px = 500um, 3px = 100um
-		%\draw[|-|,blue,thick] (194,615) -- (685,284) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{19.723}{\milli\meter} (592px) TEMPORARY!};
-		\draw[|-|] (\x,\y) -- (\x+300,\y) node [midway,above] {\SI{1}{\centi\meter}};
-		%\draw[color=red, anchor=south west] (0,803) node [fill=white, semitransparent] {Legend} node {Legend};
-	\end{tikzpicture}%
+
+\begin{frame}{Multimodal imaging: \uct and 3View, correlated}
+	\begin{itemize}
+		\item Fibrose grading
+		\item Sampling location
+		\item \uct
+		\item serial block-face scanning electron microscopy (\href{http://www.gatan.com/products/sem-imaging-spectroscopy/3view-system}{3View})
+		\item Registration of datasets, from overview to ultrafine structure
+		\item Combination with histology
+		\item Multimodal has been done before, with luck and not in 3D :) \cite{Haberthuer2009}
+	\end{itemize}
 \end{frame}
+	
+%\begin{frame}{Overview scan with \SI{20}{\micro\meter} pixel size}
+%	\renewcommand{\imsize}{0.55\linewidth}
+%	\pgfmathsetlength{\imagewidth}{\imsize}%
+%	\pgfmathsetlength{\imagescale}{\imagewidth/864}%
+%	\def\x{534}% scalebar-x starting at golden ratio of image width of 864px = 534
+%	\def\y{723}% scalebar-y at 90% of image height of 803px = 723
+%	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+%		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {
+%			\animategraphics[palindrome, width=\imsize]{24}{./img/movie_tumor_20um/image}{3503}{4037}
+%			};
+%		% 592px = 19.723mm > 100px = 3331um > 15px = 500um, 3px = 100um
+%		%\draw[|-|,blue,thick] (194,615) -- (685,284) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{19.723}{\milli\meter} (592px) TEMPORARY!};
+%		\draw[|-|] (\x,\y) -- (\x+300,\y) node [midway,above] {\SI{1}{\centi\meter}};
+%		%\draw[color=red, anchor=south west] (0,803) node [fill=white, semitransparent] {Legend} node {Legend};
+%	\end{tikzpicture}%
+%	\nocite{Royer2015}
+%\end{frame}
 
 \begin{frame}{Overview, Detail and 3View}
 	\renewcommand{\imsize}{0.25\linewidth}
@@ -312,27 +353,121 @@
 \end{frame}
 
 \section{Brain tumors}
+\label{sec:grenoble}
 \begin{frame}{Brain tumor radiation treatment}
-    \begin{itemize}
-        \item Induced tumors in rat brains
-        \item Microbeam and broadbeam treatment vs.\ control
-        \item \uaf-filled brain vasculature
-        \item Nondestructive extraction of
-        \begin{itemize}
-            \item Vessel to tumor volume ratio
-            \item Vessel surface
-            \item Intra-tumoral microvessel density (IMD, \cite{Hasan2002})
-        \end{itemize}
-    \end{itemize}
+	\begin{itemize}
+		\item Judah Folkman: \blockquote[\cite{Sherwood1971}]{Tumors that exist in the dormant state have not become vascularised.}
+		\pause
+		\item Antiangiogenesis as tumor therapy
+		\begin{itemize}
+			\item \href{https://clinicaltrials.gov/ct2/results?term=antiangiogenic}{\textgreater4000 clinical trials}
+			\item Results disappointing
+			\item New, powerful and simple treatment strategies are needed
+		\end{itemize}
+		\pause
+		\item Microbeam radiation therapy
+		\begin{itemize}
+			\item Delivery of very high dose (\SIrange{100}{5000}{\gray}) in less than \SI{1}{\second}.
+			\item \emph{Excellent} survival rate \cite{Laissue1998}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rat brain tumors}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			\begin{itemize}
+		    	\item Induced tumors
+		    	\item 9L Gliosarcoma \cite{Bouchet2014}
+		    	\item Microbeam and broadbeam treatment vs.\ control
+		    	\item \uaf-filled brain vasculature
+		    	\item Nondestructive extraction of
+		    	\begin{itemize}
+		    		\item Vessel to tumor volume ratio
+		    		\item Vessel surface
+		    		\item Intra-tumoral microvessel density (IMD, \cite{Hasan2002})
+		    	\end{itemize}
+			\end{itemize}
+		\end{column}
+		\renewcommand{\imsize}{\linewidth}
+		\begin{column}{0.25\linewidth}
+			\pgfmathsetlength{\imagewidth}{\imsize}%
+			\pgfmathsetlength{\imagescale}{\imagewidth/319}%
+			\def\x{197}% scalebar-x starting at golden ratio of image width of 319px = 197
+			\def\y{491}% scalebar-y at 90% of image height of 546px = 491
+			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+				\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/{{macro_brain_d24_ctrl}}}};
+				% 500px = 30.0mm > 100px = 6004um > 8px = 500um, 2px = 100um
+				%\draw[|-|,blue,thick] (179,523) -- (121,27) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{30.0}{\milli\meter} (500px) TEMPORARY!};
+				\draw[|-|] (\x,\y) -- (\x+83,\y) node [midway,above] {\SI{5}{\milli\meter}};
+				\pause
+				\draw<2>[red, thick] (203,192) circle (50);
+			\end{tikzpicture}%
+		\end{column}
+		\begin{column}{0.25\linewidth}
+			\pgfmathsetlength{\imagewidth}{\imsize}%
+			\pgfmathsetlength{\imagescale}{\imagewidth/321}%
+			\def\x{198}% scalebar-x starting at golden ratio of image width of 321px = 198
+			\def\y{460}% scalebar-y at 90% of image height of 511px = 460
+			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+				\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/{{macro_brain_d24_mrt}}}};
+				% 463px = 30.0mm > 100px = 6478um > 8px = 500um, 2px = 100um
+				%\draw[|-|,blue,thick] (163,479) -- (162,16) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{30.0}{\milli\meter} (463px) TEMPORARY!};
+				\draw[|-|] (\x,\y) -- (\x+77,\y) node [midway,above] {\SI{5}{\milli\meter}};
+				\draw<2>[red, thick] (199,187) circle (30);
+			\end{tikzpicture}%
+		\end{column}		
+	\end{columns}	
+\end{frame}
+
+\begin{frame}{Rat brain tumors}
+	\begin{itemize}
+		\item 34 (of 59) animals scanned 
+		%\begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0.5 34/59 \spark 0 1 1 1/ \end{sparkline}
+		\begin{itemize}
+			\item 7 (of 15) @ D16
+			\begin{itemize}
+				\item 3/5 mrt, 2/5 bb, 2/5 ctrl
+				%\item \begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0.1 3/5 \sparkspike 0.5 2/5 \sparkspike 0.9 2/5 / \end{sparkline}
+			\end{itemize}
+			\item 7 (of 15) @ D20
+			\begin{itemize}
+				\item 5/5 mrt, 2/5 bb, 2/5 ctrl
+				%\item \begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0.25 5/5 \sparkspike 0.5 2/5 \sparkspike 0.75 2/5\end{sparkline}
+			\end{itemize}
+			\item 18 (of 29) @ D24
+			\begin{itemize}
+				\item 8/10 mrt, 6/11 bb, 4/8 ctrl
+				%\item \begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0 8/10 \sparkspike 0.5 6/11 \sparkspike 1 4/8/\end{sparkline}
+			\end{itemize}
+		\end{itemize}
+	\item Each scan takes \SI{\sim 18}{\hour}, plus reconstruction and ROI delineation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rat brain tumors}
+	\begin{itemize}
+		\item Scan
+		\item Reconstruct
+		\item Delineate ROI
+		\item Threshold
+		\item Calculate Tumor and vessel volume
+	\end{itemize}
+	\todo{Examples with images}
 \end{frame}
 
 \renewcommand{\imsize}{0.9\linewidth}	
 \begin{frame}{vessel volume ratio}
-    \includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_ratio_violin}
+	\includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_ratio_violin}
+\end{frame}
+
+\renewcommand{\imsize}{0.9\linewidth}	
+\begin{frame}{vessel volume ratio}
+	\includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_ratio_violin}
 \end{frame}
 
 \begin{frame}{vessel surface}
-    \includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_surface_per_tumor_volume}
+	\includegraphics[width=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_surface_per_tumor_volume}
 \end{frame}
 
 \begin{frame}{imd}
@@ -342,6 +477,9 @@
 \begin{frame}{Thanks}
 	\begin{itemize}
 		\item Topographic and clinical Anatomy
+		\item Audrey Bouchet
+		\item Jean Laissue
+		\item ESRF Grenoble
 		\item SNF
 		\pause
 		\item You, for listening
@@ -350,9 +488,10 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{References}
-    \renewcommand*{\bibfont}{\tiny}
-    \printbibliography
+\begin{frame}[allowframebreaks]{References}
+	\renewcommand*{\bibfont}{\tiny}
+	\setbeamertemplate{bibliography item}{\insertbiblabel}
+	\printbibliography
 \end{frame}
 
 \end{document}
