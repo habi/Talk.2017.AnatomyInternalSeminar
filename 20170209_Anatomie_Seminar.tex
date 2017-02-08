@@ -1,42 +1,40 @@
-\documentclass[]{beamer}
+%\documentclass[notes]{beamer}       % print frame + notes
+%\documentclass[notes=only]{beamer}   % only notes
+\documentclass{beamer}              % only frames
 \usetheme[color=screen]{UniBern}
 
-%\setbeameroption{show notes}
+\setbeameroption{show notes}
 %\includeonlyframes{current}
 
 \usepackage{lmodern}
 \usepackage[english]{babel}
 \usepackage{microtype}
 \usepackage{textcomp}
-\usepackage[backend=biber, style=alphabetic, url=false]{biblatex}
+\usepackage[backend=biber, style=numeric, url=false, isbn=false, maxbibnames=1, sorting=none]{biblatex}
 \addbibresource{../../Documents/library.bib}
 \usepackage{graphicx}
-\usepackage{caption}
-	\captionsetup[figure]{labelformat=empty} % No 'figure' in figures
 \usepackage{tikz}
 	\usetikzlibrary{arrows.meta,shapes}
 \usepackage[detect-all=true, range-phrase=--, range-units=single]{siunitx}
 \usepackage{csquotes}
 \usepackage{animate}
-\usepackage{sparklines}
-\usepackage{booktabs}
 \usepackage[absolute,overlay]{textpos} %for the \source{} command
 \usepackage{gitinfo2}
 \usepackage{xspace}
-\usepackage{todonotes}
-	\presetkeys{todonotes}{inline}{} % http://tex.stackexchange.com/a/12331/828
+\usepackage[normalem]{ulem}
 \usepackage{hyperref}
 
+% Fit the presentation to the window when first displayed
 \hypersetup{pdfstartview={Fit}}
-\setbeamertemplate{caption}{\insertcaption}
-\setbeamertemplate{caption}[numbered]
 
+% Setup some often used commands
 \newcommand{\imsize}{\linewidth}
 \newlength\imagewidth % needed for scalebars
 \newlength\imagescale % ditto
 \newcommand{\uct}{\si{\micro}CT\xspace}
 \newcommand{\uaf}{\si{\micro}AngioFil\xspace}
 
+% Acknowledge random stuff
 \newcommand{\source}[1]{%http://tex.stackexchange.com/a/48485/828
 	\begin{textblock*}{4cm}(8.7cm,8.6cm)%
 		\begin{beamercolorbox}[ht=0.5cm,right]{framesource}%
@@ -45,37 +43,17 @@
 	\end{textblock*}%
 }
 
-% define unibe color
+% define 'unibe' color
 \definecolor{unibe}{RGB}{156,189,222}
 
-% Biblatex: http://tex.stackexchange.com/a/13076/828
-% Format bibliography for beamer
-% http://tex.stackexchange.com/a/10686/828
-\renewbibmacro{in:}{}
-% % http://tex.stackexchange.com/a/13076/828
-% \AtEveryBibitem{\clearfield{title}}
-% \AtEveryBibitem{\clearfield{journaltitle}}
-% \AtEveryBibitem{\clearfield{year}}
-% \AtEveryBibitem{\clearfield{pages}}
-% \AtEveryBibitem{\clearfield{volume}}
-% \AtEveryBibitem{\clearfield{number}}
-% %http://tex.stackexchange.com/a/40710/828
-% \usepackage{xpatch}
-% \xpatchbibmacro{month}{%
-%   \printtext[parens]%
-% }{%
-%   \setunit*{\addperiod\space}%
-%   \printtext%
-% }{}{} 
+% Show current section at begin of sections
+\AtBeginSection[]{
+  \begin{frame}{Outline}
+  \small \tableofcontents[currentsection, hideothersubsections]
+  \end{frame} 
+}
 
-\subtitle{Several examples as well as details in lung and brain imaging}
-\author[David Haberthür]{David Haberthür \and\tiny Adolfo Odriozola \and Ruslan Hlushchuk \and Valentin Djonov}
-\institute{Institute of Anatomy, University of Bern}
-\date{February 9, 2017\\Internal Seminar}
-
-\begin{document}
-\title[\si{\micro}CT in biological studies]{\si{\micro}CT-imaging at the Institute of Anatomy} % http://tex.stackexchange.com/a/144445/828
-
+% Define us a nice footer with the 'necessary' info
 \defbeamertemplate{footline}{unibe}
 {%
 \usebeamercolor[fg]{page number in head/foot}%
@@ -93,6 +71,26 @@
 }
 \setbeamertemplate{footline}[unibe]
 
+% Format bibliography for beamer
+% http://tex.stackexchange.com/a/10686/828
+\renewbibmacro{in:}{}
+% % http://tex.stackexchange.com/a/13076/828
+% \AtEveryBibitem{\clearfield{title}}
+\AtEveryBibitem{\clearfield{journaltitle}}
+\AtEveryBibitem{\clearfield{pages}}
+\AtEveryBibitem{\clearfield{volume}}
+\AtEveryBibitem{\clearfield{number}}
+\AtEveryBibitem{\clearfield{editors}}
+
+% Subtitle and other informations
+\subtitle{Several examples as well as details in lung and brain imaging}
+\author[David Haberthür]{David Haberthür \and\tiny Adolfo Odriozola \and Ruslan Hlushchuk \and Valentin Djonov}
+\institute{Institute of Anatomy, University of Bern}
+\date{February 9, 2017\\Internal Seminar}
+
+\begin{document}
+\title[\si{\micro}CT in biological studies]{\si{\micro}CT-imaging at the Institute of Anatomy} % http://tex.stackexchange.com/a/144445/828
+
 {%
 % No footline on title page: http://tex.stackexchange.com/a/18829/828
 	\setbeamertemplate{footline}{}%
@@ -100,13 +98,12 @@
 		\titlepage%
 	\end{frame}%
 }
-\addtocounter{framenumber}{1}
+\setcounter{framenumber}{0}
 
 \begin{frame}{Contents}
 	\tableofcontents
 \end{frame}
 
-\section{Theory}
 \renewcommand{\imsize}{0.95\textheight}
 \begin{frame}{Computed tomography}
 	\begin{columns}
@@ -165,7 +162,7 @@
 	Visualization of a tomographic scan of a rat head, instilled with \uaf and fixed in \SI{4}{\percent} PFA.
 \end{frame}
 
-\begin{frame}{Rat brain vessels}
+\begin{frame}{Brain vasculature}
 	\renewcommand{\imsize}{\linewidth}%
 	\begin{columns}
 		\begin{column}{0.618\linewidth}
@@ -193,18 +190,34 @@
 	\end{columns}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Help for the Sekretariat}
+	\renewcommand{\imsize}{\linewidth}%
+		\animategraphics[autoplay,palindrome,width=\imsize]{24}{img/movie_spider_7um/spider_07um_rec00000}{001}{501}
+\end{frame}
+
 \section{Assessing tumor/metastasis load in lungs}
 \begin{frame}
 	\frametitle{Tumor metastasis}
 	\begin{itemize}
 		\item \emph{Problem:} Tumor load?
 		\pause
-		\item \emph{Solution:} Stereology on \uct data!
+		\item \emph{Solution:} Stereology\pause\xspace on \uct data!
 		\item[]
 		\pause
 		\item KP-TNIK mice \cite{DuPage2009} from collaboration with DKF
 		\item Stereology as part of \href{https://www.anaintra.unibe.ch/studenten_view.php?filter=aktuell}{Masters Thesis} of \href{http://www.anaweb.ch/ueber_uns/team/detail/index_ger.php?id=485}{Andreas Gübeli}
 	\end{itemize}
+	\note{%
+		Unsere Maus nennt sich KP-Mouse model.
+		Wir haben ein conditional knockout (Null-Allel) für p53 und eine conditional overactivation of KRAS (G12D point mutation).
+		Conditional heisst, dass wir im "Normalzustand" physiologische Expressionen von KRAS und p53 haben.
+		Bei Darmtumore schaut man darauf, ob KRAS mutiert ist.
+		KRAS-Mutationen führen zu unkontrollierter Zellteilung.
+		p53 ist Tumorsuppressor.
+		Diese 2 Mutationen führen dann in der Maus innerhalb von wenigen Wochen/Monaten zu Tumoren.
+		Wenn wir also am Schluss eine KP-TNIK Maus haben und diese mit einem Cre Exprimierenden Virus in der Lunge behandeln, wird simultan TNIK und p53 deaktiviert und KRAS überaktiviert.
+		Haus-Pharmazeutin sagt, dass KO mehr Tumore haben muss.}
 \end{frame}
 
 \begin{frame}
@@ -214,7 +227,7 @@
 		\begin{column}{0.8\linewidth}
 			\pgfmathsetlength{\imagewidth}{\imsize}%
 			\pgfmathsetlength{\imagescale}{\imagewidth/800}%
-			\def\x{494}% scalebar-x starting at golden ratio of image width of 800px = 494
+			\def\x{400-125}% scalebar-x starting at golden ratio of image width of 800px = 494
 			\def\y{720}% scalebar-y at 90% of image height of 800px = 720
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
 			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_--11}}}};
@@ -255,7 +268,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Tumor load in lungs, KP-TNIK mice. }
+	\frametitle{Tumor load in lungs, KP-TNIK mice.}
 	\renewcommand{\imsize}{\linewidth}%
 	\begin{columns}
 		\begin{column}{0.8\linewidth}
@@ -272,18 +285,18 @@
 
 \section{Lung fibrosis}
 \begin{frame}
-	\frametitle{Backstory}
+	\frametitle{Lung fibrosis}
 	\begin{itemize}
 		\item \emph{Problem:} Lung fibrosis grading \cite{Ashcroft1988a} and correct sampling for proper assessment?
 		\pause
-		\item \emph{Solution:} \uct!
+		\item \emph{Solution:} Correlative imaging with \uct, EM (and Histology)!
 		\item[]
 		\pause
 	\item \uct is a tool to help grade fibrosis \cite{DeLanghe2012,Rodt2010}
 		\begin{itemize}
-			\item Detect and grade fibrosis
+			\item Detect and mark fibrosis regions in 3D
 			\item Get indications where to perform the sampling
-			\item But still limited resolution!
+			\item Still limited resolution
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -295,10 +308,10 @@
 		\item Fibrose grading should be done on ultra fine level \cite{Hubner2008}
 		\pause
 		\item \uct combined with serial block-face scanning electron microscopy (\href{http://www.gatan.com/products/sem-imaging-spectroscopy/3view-system}{3View})
-		\item Registration of datasets, from overview to ultrafine structure
+		\item Registration of datasets; from overview to ultrafine structure
 		\item Combination with histology
 		\pause
-		\item Multimodal has been done before, with luck and not in 3D :) \cite{Haberthuer2009}
+		\item Multimodal has been done before, with luck and long, hard work, not in full 3D \cite{Haberthuer2009}
 	\end{itemize}
 \end{frame}
 
@@ -358,23 +371,29 @@
 	\pgfmathsetlength{\imagescale}{\imagewidth/8192}%
 	\def\x{5063}% scalebar-x starting at golden ratio of image width of 8192px = 5063
 	\def\y{6313}% scalebar-y at 90% of image height of 7014px = 6313
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, remember picture]
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Overview}};
 	% 8192px = 0.9486336mm > 100px = 12um > 4318px = 500um, 864px = 100um
 	%\draw[|-|,blue,thick] (0,3507) -- (8192,3507) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.9486336}{\milli\meter} (8192px) TEMPORARY!};
-	\draw[|-|,white,thick] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};
+	\draw[|-|,white,thick] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};		\node<3>[red,draw,circle,inner sep=8pt] (overview) at (792,3280) {};
 \end{tikzpicture}%
 	\pause
 \pgfmathsetlength{\imagewidth}{\imsize}%
 \pgfmathsetlength{\imagescale}{\imagewidth/8192}%
 \def\x{5063}% scalebar-x starting at golden ratio of image width of 8192px = 5063
 \def\y{7373}% scalebar-y at 90% of image height of 8192px = 7373
-\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+\begin{tikzpicture}[x=\imagescale,y=-\imagescale, remember picture]
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Detail}};;
 	% 8192px = 0.098304mm > 100px = 1um > 41667px = 500um, 8333px = 100um
 	%\draw[|-|,blue,thick] (0,4096) -- (8192,4096) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.098304}{\milli\meter} (8192px) TEMPORARY!};
-	\draw[|-|,white,thick] (\x,\y) -- (\x+833.3,\y) node [midway,above] {\SI{10}{\micro\meter}};
-\end{tikzpicture}%
+		\draw[|-|,white,thick] (\x,\y) -- (\x+833.3,\y) node [midway,above] {\SI{10}{\micro\meter}};
+		\node<3> (detail-2) at (4096,250) {};
+		\node<3> (detail-2) at (4096,8192-250) {};
+	\end{tikzpicture}%
+	\begin{tikzpicture}[remember picture,overlay]
+		\draw<3>[dashed,red] (overview) -- (detail-1);
+		\draw<3>[dashed,red] (overview) -- (detail-2);
+	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}[label=current]
@@ -403,7 +422,7 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/uCT_Cube_with_3View_Registration_Average}};
 		% 3812px = 11.436mm > 100px = 300um > 167px = 500um, 33px = 100um
 		%\draw[|-|,blue,thick] (0,1906) -- (3812,1906) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{11.436}{\milli\meter} (3812px) TEMPORARY!};
-	\draw[|-|,white,thick] (\x,\y) -- (\x+167,\y) node [midway,above] {\SI{500}{\micro\meter}};
+		\draw[|-|,white,thick] (\x,\y) -- (\x+1000,\y) node [midway,above] {\SI{500}{\micro\meter}};
 	\end{tikzpicture}%
 \end{frame}
 
@@ -418,14 +437,12 @@
 		\item[]
 		\pause
 		\item Judah Folkman: \blockquote[\cite{Sherwood1971}]{Tumors that exist in the dormant state have not become vascularised.}
-		\pause
 		\item Antiangiogenesis as tumor therapy
 		\begin{itemize}
 			\item \href{https://clinicaltrials.gov/ct2/results?term=antiangiogenic}{\textgreater4000 clinical trials}
-			\item Results disappointing
+			\item Results \sout{disappointing} unsatisfactory
 			\item New, powerful and simple treatment strategies are needed
 		\end{itemize}
-		\pause
 		\item Microbeam radiation therapy
 		\begin{itemize}
 			\item Delivery of very high dose (\SIrange{100}{5000}{\gray}) in less than \SI{1}{\second}.
@@ -452,7 +469,7 @@
 			\end{itemize}
 		\end{column}
 		\renewcommand{\imsize}{1\linewidth}
-		\begin{column}{0.28\linewidth}
+		\begin{column}{0.29\linewidth}
 			\pgfmathsetlength{\imagewidth}{\imsize}%
 			\pgfmathsetlength{\imagescale}{\imagewidth/299}%
 			\def\x{185}% scalebar-x starting at golden ratio of image width of 299px = 185
@@ -465,8 +482,8 @@
 				\pause
 				\draw<2>[red, thick] (203,192) circle (50);
 			\end{tikzpicture}%
-		\end{column}
-		\begin{column}{0.28\linewidth}
+		\end{column}%
+		\begin{column}{0.29\linewidth}%
 			\pgfmathsetlength{\imagewidth}{\imsize}%
 			\pgfmathsetlength{\imagescale}{\imagewidth/299}%
 			\def\x{185}% scalebar-x starting at golden ratio of image width of 299px = 185
@@ -534,6 +551,18 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Summary}
+	\begin{itemize}
+		\item \uct is a powerful methoth to get both pretty and meaningful insight into a broad kind of samples
+		\item Non-destructiveness makes it a complementary method to established assessment methods (Stereology, SEM, Histology)
+		\item Three-dimensional, numerical data enables quantitative assessment of sample properties
+		\item[]
+		\pause
+		\item Come and ask us if you want to look into your samples!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Thanks}
 	\begin{itemize}
 		\item Topographic and clinical Anatomy
@@ -543,6 +572,7 @@
 		\item SNF
 		\pause
 		\item You, for listening
+		\item[]
 		\pause
 		\item Questions?
 	\end{itemize}
