@@ -1,8 +1,8 @@
-\documentclass[caption=numbered]{beamer}
+\documentclass[]{beamer}
 \usetheme[color=screen]{UniBern}
 
 %\setbeameroption{show notes}
-\includeonlyframes{current}
+%\includeonlyframes{current}
 
 \usepackage{lmodern}
 \usepackage[english]{babel}
@@ -14,7 +14,7 @@
 \usepackage{caption}
 	\captionsetup[figure]{labelformat=empty} % No 'figure' in figures
 \usepackage{tikz}
-	\usetikzlibrary{spy}
+	\usetikzlibrary{arrows.meta,shapes}
 \usepackage[detect-all=true, range-phrase=--, range-units=single]{siunitx}
 \usepackage{csquotes}
 \usepackage{animate}
@@ -45,10 +45,13 @@
 	\end{textblock*}%
 }
 
+% define unibe color
+\definecolor{unibe}{RGB}{156,189,222}
+
 % Biblatex: http://tex.stackexchange.com/a/13076/828
-% % Format bibliography for beamer
-% % http://tex.stackexchange.com/a/10686/828
-% \renewbibmacro{in:}{}
+% Format bibliography for beamer
+% http://tex.stackexchange.com/a/10686/828
+\renewbibmacro{in:}{}
 % % http://tex.stackexchange.com/a/13076/828
 % \AtEveryBibitem{\clearfield{title}}
 % \AtEveryBibitem{\clearfield{journaltitle}}
@@ -67,17 +70,15 @@
 
 \subtitle{Several examples as well as details in lung and brain imaging}
 \author[David Haberthür]{David Haberthür \and\tiny Adolfo Odriozola \and Ruslan Hlushchuk \and Valentin Djonov}
-\institute{Institute of Anatomy\\Universität Bern}
-\date{February 9, 2017\\Internal seminar@Institute of Anatomy}
-
-%\useoutertheme{split}
+\institute{Institute of Anatomy, University of Bern}
+\date{February 9, 2017\\Internal Seminar}
 
 \begin{document}
 \title[\si{\micro}CT in biological studies]{\si{\micro}CT-imaging at the Institute of Anatomy} % http://tex.stackexchange.com/a/144445/828
 
 \defbeamertemplate{footline}{unibe}
 {%
-	\usebeamercolor[fg]{page number in head/foot}%
+\usebeamercolor[fg]{page number in head/foot}%
 	\usebeamerfont{page number in head/foot}%
 	\hspace*{\fill}%
 	\insertshortauthor%
@@ -92,11 +93,12 @@
 }
 \setbeamertemplate{footline}[unibe]
 
-{
-\setbeamertemplate{footline}{} % http://tex.stackexchange.com/a/18829/828
-\begin{frame}
-  \titlepage
-\end{frame}
+{%
+% No footline on title page: http://tex.stackexchange.com/a/18829/828
+	\setbeamertemplate{footline}{}%
+	\begin{frame}%
+		\titlepage%
+	\end{frame}%
 }
 \addtocounter{framenumber}{1}
 
@@ -106,7 +108,7 @@
 
 \section{Theory}
 \renewcommand{\imsize}{0.95\textheight}
-\begin{frame}{Theory computed tomography}
+\begin{frame}{Computed tomography}
 	\begin{columns}
 		\begin{column}{0.7\linewidth}
 			\includegraphics[width=\imsize]{img/CT_PRINCI_PB}
@@ -128,38 +130,39 @@
 
 \section{Current and ongoing projects}
 \begin{frame}{Zebrafish}
-	\renewcommand{\imsize}{\linewidth}%
-	\begin{figure}%
-		\pgfmathsetlength{\imagewidth}{\imsize}%
-		\pgfmathsetlength{\imagescale}{\imagewidth/1651}%
-		\def\x{1020}% scalebar-x starting at golden ratio of image width of 1651px = 1020
-		\def\y{391}% scalebar-y at 90% of image height of 434px = 391
-		\begin{tikzpicture}[x=\imagescale,y=-\imagescale]%
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/{{zebrafish_rec_voi_side}}}};
-			% 1615px = 35.48 > 100px = 2198um > 23px = 500um, 5px = 100um
-			%\draw[|-|,blue,thick] (20,154) -- (1634,127) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{35.487480000000005}{\milli\meter} (1615px) TEMPORARY!};
-			\draw[|-|] (\x,\y) -- (\x+234.19,\y) node [midway,above] {\SI{5}{\milli\meter}};
-		\end{tikzpicture}%
-		\caption{Visualization of a tomographic scan of a zebrafish, fixed in \SI{4}{\percent} PFA.}%
-	\end{figure}%
+	\renewcommand{\imsize}{\paperwidth}%
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/1651}%
+	\def\x{1020}% scalebar-x starting at golden ratio of image width of 1651px = 1020
+	\def\y{391}% scalebar-y at 90% of image height of 434px = 391
+	\makebox[\linewidth]{%
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]%
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/{{zebrafish_rec_voi_side}}}};
+		% 1615px = 35.48 > 100px = 2198um > 23px = 500um, 5px = 100um
+		%\draw[|-|,blue,thick] (20,154) -- (1634,127) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{35.487480000000005}{\milli\meter} (1615px) TEMPORARY!};
+		\draw[|-|] (\x,\y) -- (\x+234.19,\y) node [midway,above] {\SI{5}{\milli\meter}};
+	\end{tikzpicture}%
+	}
+	Visualization of a tomographic scan of a zebrafish, fixed in \SI{4}{\percent} PFA.
 \end{frame}
 
-\begin{frame}{Rat head}
-	\renewcommand{\imsize}{0.9\linewidth}%
-	\begin{figure}%
-		\pgfmathsetlength{\imagewidth}{\imsize}%
-		\pgfmathsetlength{\imagescale}{\imagewidth/1400}%
-		\def\x{865}% scalebar-x starting at golden ratio of image width of 1400px = 865
-		\def\y{560}% scalebar-y at 90% of image height of 622px = 560
-		\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/{{ratwholehead_rec_side}}}};
-			%\spy [red] on (1100,322) in node at (0,0) [anchor=north west];
-			% 1358px = 47.76mm > 100px = 3517um > 14px = 500um, 3px = 100um
-			%\draw[|-|,blue,thick] (23,291) -- (1380,311) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{47.76}{\milli\meter} (1358px) TEMPORARY!};
-			\draw[|-|] (\x,\y) -- (\x+140,\y) node [midway,above] {\SI{5}{\milli\meter}};
-		\end{tikzpicture}%
-		\caption{Visualization of a tomographic scan of a rat head, instilled with \uaf and fixed in \SI{4}{\percent} PFA.}%
-	\end{figure}%
+\begin{frame}
+	\frametitle{Rat head}
+	\renewcommand{\imsize}{\paperwidth}%
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/1400}%
+	\def\x{865}% scalebar-x starting at golden ratio of image width of 1400px = 865
+	\def\y{560}% scalebar-y at 90% of image height of 622px = 560
+	\makebox[\linewidth]{%
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]%
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/{{ratwholehead_rec_side}}}};
+		%\spy [red] on (1100,322) in node at (0,0) [anchor=north west];
+		% 1358px = 47.76mm > 100px = 3517um > 14px = 500um, 3px = 100um
+		%\draw[|-|,blue,thick] (23,291) -- (1380,311) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{47.76}{\milli\meter} (1358px) TEMPORARY!};
+		\draw[|-|] (\x,\y) -- (\x+140,\y) node [midway,above] {\SI{5}{\milli\meter}};
+	\end{tikzpicture}%
+	}
+	Visualization of a tomographic scan of a rat head, instilled with \uaf and fixed in \SI{4}{\percent} PFA.
 \end{frame}
 
 \begin{frame}{Rat brain vessels}
@@ -174,14 +177,14 @@
 				\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/Ebene_25}};
 				% 1949px = 20.0mm > 100px = 1026um > 49px = 500um, 10px = 100um
 				%\draw[|-|,blue,thick] (39,1222) -- (1722,239) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{20.0}{\milli\meter} (1949px) TEMPORARY!};
-				\draw[|-| ] (\x,\y) -- (\x+490,\y) node [midway,above] {\SI{5}{\milli\meter}};
+				\draw[|-|, thick] (\x,\y) -- (\x+490,\y) node [midway,above] {\SI{5}{\milli\meter}};
 				\node [anchor=center] (cb) at (2000,0) {Cerebellum};
-				\draw [thick] (cb.west) to [out=-180, in=0] (1482,144);
+				\draw [thick,double,draw=unibe,double=black] (cb.west) to [out=-180, in=0] (1482,144);
 				\node [anchor=center] (bs) at (2250,1500) {Brain stem};
-				\draw [thick] (bs.west) to [out=180, in=-45] (1705,725);
+				\draw [thick,double,draw=unibe,double=black] (bs.west) to [out=180, in=-45] (1705,725);
 				\node [anchor=center, text width=2cm, align=center] (ob) at (550,1500) {Olfactory bulbs};
-				\draw [thick] (ob.west) to [out=180, in=180] (210,880);
-				\draw [thick] (ob.west) to [out=180, in=180] (298,1116);
+				\draw [thick,double,draw=unibe,double=black] (ob.west) to [out=180, in=180] (210,880);
+				\draw [thick,double,draw=unibe,double=black] (ob.west) to [out=180, in=180] (298,1116);
 			\end{tikzpicture}
 		\end{column}		
 		\begin{column}{0.382\linewidth}
@@ -194,15 +197,19 @@
 \begin{frame}
 	\frametitle{Tumor metastasis}
 	\begin{itemize}
-		\item Assessing tumor load in lungs
-		\item KP-TNIK mice
-		\item Stereology
+		\item \emph{Problem:} Tumor load?
+		\pause
+		\item \emph{Solution:} Stereology on \uct data!
+		\item[]
+		\pause
+		\item KP-TNIK mice \cite{DuPage2009} from collaboration with DKF
+		\item Stereology as part of \href{https://www.anaintra.unibe.ch/studenten_view.php?filter=aktuell}{Masters Thesis} of \href{http://www.anaweb.ch/ueber_uns/team/detail/index_ger.php?id=485}{Andreas Gübeli}
 	\end{itemize}
 \end{frame}
 
-\renewcommand{\imsize}{0.33\linewidth}
 \begin{frame}
 	\frametitle{Tumor load in lungs, KP-TNIK mice}
+	\renewcommand{\imsize}{0.33\linewidth}
 	\begin{columns}
 		\begin{column}{0.8\linewidth}
 			\pgfmathsetlength{\imagewidth}{\imsize}%
@@ -210,30 +217,31 @@
 			\def\x{494}% scalebar-x starting at golden ratio of image width of 800px = 494
 			\def\y{720}% scalebar-y at 90% of image height of 800px = 720
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_--11}}}};
+			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_--11}}}};
 			% 800px = 16.0mm > 100px = 2000um > 25px = 500um, 5px = 100um
 			%\draw[|-|,blue,thick] (0,400) -- (800,400) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{16.0}{\milli\meter} (800px) TEMPORARY!};
-			\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
+			%\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 			\end{tikzpicture}%
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_--12}}}};
-			\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
+			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_--12}}}};
+			%\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 			\end{tikzpicture}%
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_--13}}}};
+			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_--13}}}};
 			\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 			\end{tikzpicture}%
+			\vspace{0.25cm}%
 			\\%
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_wt11}}}};
-			\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
+			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_wt11}}}};
+			%\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 			\end{tikzpicture}%
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_wt12}}}};
-			\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
+			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_wt12}}}};
+			%\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 			\end{tikzpicture}%
 			\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{../../Documents/Collaborations/DKF_Lung/Overview/{{MAX_wt13}}}};
+			\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/ochsenbein/{{MAX_wt13}}}};
 			\draw[|-|] (\x,\y) -- (\x+250,\y) node [midway,above] {\SI{5}{\milli\meter}};
 			\end{tikzpicture}%
 		\end{column}
@@ -246,144 +254,169 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Tumor load in lungs, KP-TNIK mice. Top: KO, bottom: WT}
-	\renewcommand{\imsize}{0.85\linewidth}  
-	\animategraphics[palindrome,width=\imsize]{12}{../../Documents/Collaborations/DKF_Lung/movieframes/out-}{001}{255}
+\begin{frame}
+	\frametitle{Tumor load in lungs, KP-TNIK mice. }
+	\renewcommand{\imsize}{\linewidth}%
+	\begin{columns}
+		\begin{column}{0.8\linewidth}
+		\animategraphics[autoplay,palindrome,width=\imsize]{12}{../../Documents/Collaborations/DKF_Lung/movieframes/out-}{001}{255}
+		\end{column}
+		\begin{column}{0.15\textwidth}
+			\begin{itemize}
+				\item KO
+				\item WT
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \section{Lung fibrosis}
-\begin{frame}{Backstory}
+\begin{frame}
+	\frametitle{Backstory}
 	\begin{itemize}
-		\item Lung fibrosis grading \cite{Ashcroft1988a}
-		\item \emph{Correct} sampling for proper assessment
-		\item \uct is a tool to help grade fibrosis
+		\item \emph{Problem:} Lung fibrosis grading \cite{Ashcroft1988a} and correct sampling for proper assessment?
+		\pause
+		\item \emph{Solution:} \uct!
+		\item[]
+		\pause
+	\item \uct is a tool to help grade fibrosis \cite{DeLanghe2012,Rodt2010}
 		\begin{itemize}
 			\item Detect and grade fibrosis
 			\item Get indications where to perform the sampling
-		\end{itemize}
-		\item Cancer metastasis (\SI{2}{year} after radiation treatment fibrosis is induced)
-		\item Cancer treatment
-		\begin{itemize}
-			\item Antiangiogenesis (failed)
-			\item Radiation therapy, namely MRT \cite{Bronnimann2016} (probably better citation needed)!
+			\item But still limited resolution!
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\renewcommand{\imsize}{0.25\linewidth}  
 	\frametitle{Multimodal imaging: \uct and 3View, correlated imaging}
+	\renewcommand{\imsize}{0.25\linewidth}
 	\begin{itemize}
-		\item Problem: Fibrose grading \cite{Hubner2008} and sampling location
-		\item<2> \uct
-		\item<2> serial block-face scanning electron microscopy (\href{http://www.gatan.com/products/sem-imaging-spectroscopy/3view-system}{3View})
-		\item<2> Registration of datasets, from overview to ultrafine structure
-		\item<2> Combination with histology
-		\item<2> Multimodal has been done before, with luck and not in 3D :) \cite{Haberthuer2009}
+		\item Fibrose grading should be done on ultra fine level \cite{Hubner2008}
+		\pause
+		\item \uct combined with serial block-face scanning electron microscopy (\href{http://www.gatan.com/products/sem-imaging-spectroscopy/3view-system}{3View})
+		\item Registration of datasets, from overview to ultrafine structure
+		\item Combination with histology
+		\pause
+		\item Multimodal has been done before, with luck and not in 3D :) \cite{Haberthuer2009}
 	\end{itemize}
-	\vspace{-6\baselineskip}
-	\pgfmathsetlength{\imagewidth}{\imsize}%
-	\pgfmathsetlength{\imagescale}{\imagewidth/306}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-a}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {A} node {A};
-	\end{tikzpicture}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-b}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {B} node {B};
-	\end{tikzpicture}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-c}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {C} node {C};
-	\end{tikzpicture}\\%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-d}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {D} node {D};
-	\end{tikzpicture}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-e}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {E} node {E};
-	\end{tikzpicture}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-f}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {F} node {F};
-	\end{tikzpicture}\\%	
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-g}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {G} node {G};
-	\end{tikzpicture}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-h}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {H} node {H};
-	\end{tikzpicture}%
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-		\node<1>[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imsize]{img/huebner-i}};
-		\draw<1>[anchor=south west] (0,220) node [fill=white, semitransparent] {I} node {I};
-	\end{tikzpicture}%	
 \end{frame}
 
-\begin{frame}{Overview scan with \SI{20}{\micro\meter} pixel size}
+\begin{frame}
+	\frametitle{Overview scan with \SI{20}{\micro\meter} pixel size}
 	\renewcommand{\imsize}{0.53\linewidth}
 	\pgfmathsetlength{\imagewidth}{\imsize}%
 	\pgfmathsetlength{\imagescale}{\imagewidth/993}%
 	\def\x{614}% scalebar-x starting at golden ratio of image width of 993px = 614
 	\def\y{859}% scalebar-y at 90% of image height of 954px = 859
-	\def\mag{4}    % magnification of inset
-	\def\size{75}  % size of inset
-	\def\shadow{4} % shadow parameter for scalebar
-	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, spy using outlines={rectangle, magnification=\mag, size=\size, connect spies}]
-		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[palindrome, width=\imsize]{24}{./img/movie_tumor_20um/mouse_tumor_rec0}{001}{461}};
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay, palindrome, width=\imsize]{24}{./img/movie_tumor_20um/mouse_tumor_rec0}{001}{461}};
 		% 698px = 16.12mm > 100px = 2309um > 22px = 500um, 4px = 100um
-		\draw[|-|,blue,thick] (89,571) -- (787,576) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{16.12}{\milli\meter} (806px) TEMPORARY!};
-		\draw[|-|] (\x,\y) -- (\x+217,\y) node [midway,above] {\SI{5}{\milli\meter}};
+		%\draw[|-|,blue,thick] (89,571) -- (787,576) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{16.12}{\milli\meter} (806px) TEMPORARY!};
+		\draw[|-|, thick] (\x,\y) -- (\x+217,\y) node [midway,above] {\SI{5}{\milli\meter}};
 	\end{tikzpicture}%
 \end{frame}
 
-\begin{frame}[plain]
+\begin{frame}[label=current]
+	\frametitle{Overview, Detail and 3View}
+	\renewcommand{\imsize}{0.5\linewidth}
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/7776}%
+	\def\x{4806}% scalebar-x starting at golden ratio of image width of 7776px = 4806
+	\def\y{6998}% scalebar-y at 90% of image height of 7776px = 6998
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale,remember picture]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/Mouse_Tumor_IR_rec00001610}};
+		% 7776px = 23.328mm > 100px = 300um > 167px = 500um, 33px = 100um
+		%\draw[|-|,blue,thick] (0,3888) -- (7776,3888) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{23.328}{\milli\meter} (7776px) TEMPORARY!};
+		\draw[|-|,white,thick] (\x,\y) -- (\x+1670,\y) node [midway,above] {\SI{5}{\milli\meter}};
+		\node<3>[red,draw,circle,inner sep=6pt] (overview) at (1500,4160) {};
+	\end{tikzpicture}%
+	\pause
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/3812}%
+	\def\x{2356}% scalebar-x starting at golden ratio of image width of 3812px = 2356
+	\def\y{3431}% scalebar-y at 90% of image height of 3812px = 3431
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale, remember picture]
+		\node<2->[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/uct_Cube}};
+		%\spy [red] on (3512,3512) in node at (0,0) [anchor=north west];
+		% 3812px = 1.906mm > 100px = 50um > 1000px = 500um, 200px = 100um
+		%\draw[|-|,blue,thick] (0,1906) -- (3812,1906) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{1.906}{\milli\meter} (3812px) TEMPORARY!};
+		\draw[|-|,white,thick] (\x,\y) -- (\x+1000,\y) node [midway,above] {\SI{500}{\micro\meter}};
+		\node<3> (detail-1) at (2124,336) {};
+		\node<3> (detail-2) at (1470,3222) {};
+	\end{tikzpicture}%
 	\begin{tikzpicture}[remember picture,overlay]
-	\node[at=(current page.center)] {
-		\includegraphics[width=\paperwidth, height=\paperheight]{../../Documents/ProgressReports/2016.10-Fibrosis/img/Mouse_Tumor_IR_rec00001610_scalebar}
-	};
+		\draw<3>[dashed,red] (overview) -- (detail-1);
+		\draw<3>[dashed,red] (overview) -- (detail-2);
 	\end{tikzpicture}
 \end{frame}
 
-%\begin{frame}{Overview, Detail and 3View}
-%	\renewcommand{\imsize}{0.25\linewidth}
-%	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/Mouse_Tumor_IR_rec00001610_scalebar}
-%	\pause
-%	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/uct_Cube_scalebar}
-%	\pause
-%	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Overview_scalebar.jpg}
-%	\pause
-%	\includegraphics[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Detail_scalebar.jpg}	
-%	\note{%
-%		\begin{itemize}
-%			\item 3View
-%			\begin{itemize}
-%				\item Slice 297/500 from each of the datasets (ROI00 and ROI01)
-%				\item Manually registered with 6 points and Plugins > Registration > Moving least squares
-%				\item Saved on anadata/djonov > uct > Mouse\_Lung\_Metastasis > Valentin
-%			\end{itemize}
-%			\item \uct
-%				\begin{itemize}
-%					\item Mouse\_Tumor\_Cube
-%					\item Mouse\_Tumor\_Cube\_rec00002639 registered with slice 297 of 3View\_Registration.tif
-%				\end{itemize}
-%		\end{itemize}
-%	}
-%\end{frame}
-
-\begin{frame}{Overview, Detail and 3View}
+\begin{frame}[label=current]
+	\frametitle{Overview, Detail and 3View}
 	\renewcommand{\imsize}{0.5\linewidth}
-	\includegraphics<1>[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Overview_scalebar}
-	\includegraphics<2>[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/3View_Registration_scalebar}
-	\includegraphics<3>[width=\imsize]{../../Documents/ProgressReports/2016.10-Fibrosis/img/uCT_Cube_with_3View_Registration_Average_scalebar.jpg}
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/8192}%
+	\def\x{5063}% scalebar-x starting at golden ratio of image width of 8192px = 5063
+	\def\y{6313}% scalebar-y at 90% of image height of 7014px = 6313
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Overview}};
+	% 8192px = 0.9486336mm > 100px = 12um > 4318px = 500um, 864px = 100um
+	%\draw[|-|,blue,thick] (0,3507) -- (8192,3507) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.9486336}{\milli\meter} (8192px) TEMPORARY!};
+	\draw[|-|,white,thick] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};
+\end{tikzpicture}%
+	\pause
+\pgfmathsetlength{\imagewidth}{\imsize}%
+\pgfmathsetlength{\imagescale}{\imagewidth/8192}%
+\def\x{5063}% scalebar-x starting at golden ratio of image width of 8192px = 5063
+\def\y{7373}% scalebar-y at 90% of image height of 8192px = 7373
+\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Detail}};;
+	% 8192px = 0.098304mm > 100px = 1um > 41667px = 500um, 8333px = 100um
+	%\draw[|-|,blue,thick] (0,4096) -- (8192,4096) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.098304}{\milli\meter} (8192px) TEMPORARY!};
+	\draw[|-|,white,thick] (\x,\y) -- (\x+833.3,\y) node [midway,above] {\SI{10}{\micro\meter}};
+\end{tikzpicture}%
+\end{frame}
+
+\begin{frame}[label=current]
+	\frametitle{Overview, Detail and 3View}
+	\renewcommand{\imsize}{0.6\linewidth}
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/8192}%
+	\def\x{5063}% scalebar-x starting at golden ratio of image width of 8192px = 5063
+	\def\y{6313}% scalebar-y at 90% of image height of 7014px = 6313
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Registration}};
+		% 8192px = 0.9486336mm > 100px = 12um > 4318px = 500um, 864px = 100um
+		%\draw[|-|,blue,thick] (0,3507) -- (8192,3507) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.9486336}{\milli\meter} (8192px) TEMPORARY!};
+		\draw[|-|,white,thick] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};
+	\end{tikzpicture}%
+\end{frame}
+
+\begin{frame}[label=current]
+	\frametitle{Overview, Detail and 3View}
+	\renewcommand{\imsize}{0.5\linewidth}
+	\pgfmathsetlength{\imagewidth}{\imsize}%
+	\pgfmathsetlength{\imagescale}{\imagewidth/3812}%
+	\def\x{2356}% scalebar-x starting at golden ratio of image width of 3812px = 2356
+	\def\y{3431}% scalebar-y at 90% of image height of 3812px = 3431
+	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/uCT_Cube_with_3View_Registration_Average}};
+		% 3812px = 11.436mm > 100px = 300um > 167px = 500um, 33px = 100um
+		%\draw[|-|,blue,thick] (0,1906) -- (3812,1906) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{11.436}{\milli\meter} (3812px) TEMPORARY!};
+	\draw[|-|,white,thick] (\x,\y) -- (\x+167,\y) node [midway,above] {\SI{500}{\micro\meter}};
+	\end{tikzpicture}%
 \end{frame}
 
 \section{Assessing brain tumors nondestructively}
 \label{sec:grenoble}
-\begin{frame}{Brain tumor radiation treatment}
+\begin{frame}
+	\frametitle{Brain tumor radiation treatment}
 	\begin{itemize}
+		\item \emph{Problem:} Tumor angiogenesis/radiation therapy?
+		\pause
+		\item \emph{Solution:} Nondestructive imaging and assessment with \uct!
+		\item[]
+		\pause
 		\item Judah Folkman: \blockquote[\cite{Sherwood1971}]{Tumors that exist in the dormant state have not become vascularised.}
 		\pause
 		\item Antiangiogenesis as tumor therapy
@@ -401,7 +434,8 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Rat brain tumors}
+\begin{frame}
+	\frametitle{Rat brain tumors}
 	\begin{columns}
 		\begin{column}{0.5\linewidth}
 			\begin{itemize}
@@ -448,40 +482,34 @@
 	\end{columns}	
 \end{frame}
 
-\begin{frame}{Rat brain tumors}
+\begin{frame}
+	\frametitle{Rat brain tumors}
 	\begin{itemize}
-		\item 34 (of 59) animals scanned 
-		%\begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0.5 34/59 \spark 0 1 1 1/ \end{sparkline}
-		\begin{itemize}
-			\item 7 (of 15) @ D16
-			\begin{itemize}
-				\item 3/5 mrt, 2/5 bb, 2/5 ctrl
-				%\item \begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0.1 3/5 \sparkspike 0.5 2/5 \sparkspike 0.9 2/5 / \end{sparkline}
-			\end{itemize}
-			\item 7 (of 15) @ D20
-			\begin{itemize}
-				\item 5/5 mrt, 2/5 bb, 2/5 ctrl
-				%\item \begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0.25 5/5 \sparkspike 0.5 2/5 \sparkspike 0.75 2/5\end{sparkline}
-			\end{itemize}
-			\item 18 (of 29) @ D24
-			\begin{itemize}
-				\item 8/10 mrt, 6/11 bb, 4/8 ctrl
-				%\item \begin{sparkline}{2} \sparkrectangle 0 1 \sparkspike 0 8/10 \sparkspike 0.5 6/11 \sparkspike 1 4/8/\end{sparkline}
-			\end{itemize}
-		\end{itemize}
-	\item Each scan takes \SI{\sim 18}{\hour}, plus reconstruction and ROI delineation
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Rat brain tumors}
-	\begin{itemize}
-		\item Scan
-		\item Reconstruct
-		\item Delineate ROI
+		\item Scan (\SI{18}{\hour})
+		\item Reconstruct (\SIrange{2}{4}{\hour})
+		\item Delineate ROI (\SI{1}{\hour})
 		\item Threshold
 		\item Calculate Tumor and vessel volume
 	\end{itemize}
-	\todo{Examples with images}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Rat brain tumors}
+	\renewcommand{\imsize}{\linewidth}
+	\begin{columns}
+		\begin{column}{0.33\paperwidth}
+			\animategraphics[autoplay,palindrome,width=\imsize]{12}{./img/movie_b09/b09_ctrl_d24t14_0}{001}{341}
+			\centering Control
+		\end{column}
+		\begin{column}{0.33\paperwidth}
+			\animategraphics[autoplay,palindrome,width=\imsize]{12}{./img/movie_b18/b18_mrt_d24t14_0}{001}{341}
+		\centering Microbeam
+		\end{column}
+		\begin{column}{0.33\paperwidth}
+			\animategraphics[autoplay,palindrome,width=\imsize]{12}{./img/movie_b68/b68_bb_d24t14_0}{001}{341}
+		\centering Broadbeam
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \renewcommand{\imsize}{0.8\textheight}
@@ -500,12 +528,13 @@
 	\includegraphics[height=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_vol_per_tumor_volume}
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
 	\frametitle{Vessel ratio}
-	\frame{\includegraphics[height=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_vol_per_tumor_volume_day}}
+	\includegraphics[height=\imsize]{../../Documents/Brain-Grenoble/fig/vessel_vol_per_tumor_volume_day}
 \end{frame}
 
-\begin{frame}{Thanks}
+\begin{frame}
+	\frametitle{Thanks}
 	\begin{itemize}
 		\item Topographic and clinical Anatomy
 		\item Audrey Bouchet
@@ -519,7 +548,8 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}[allowframebreaks]
+	\frametitle{References}
 	\renewcommand*{\bibfont}{\tiny}
 	\setbeamertemplate{bibliography item}{\insertbiblabel}
 	\printbibliography
