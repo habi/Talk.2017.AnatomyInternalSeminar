@@ -320,14 +320,14 @@
 	\frametitle{Overview scan with \SI{20}{\micro\meter} pixel size}
 	\renewcommand{\imsize}{0.53\linewidth}
 	\pgfmathsetlength{\imagewidth}{\imsize}%
-	\pgfmathsetlength{\imagescale}{\imagewidth/993}%
-	\def\x{614}% scalebar-x starting at golden ratio of image width of 993px = 614
-	\def\y{859}% scalebar-y at 90% of image height of 954px = 859
+	\pgfmathsetlength{\imagescale}{\imagewidth/497}%
+	\def\x{614/2}% scalebar-x starting at golden ratio of image width of 993px = 614
+	\def\y{859/2}% scalebar-y at 90% of image height of 954px = 859
 	\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay, palindrome, width=\imsize]{24}{./img/movie_tumor_20um/mouse_tumor_rec0}{001}{461}};
 		% 698px = 16.12mm > 100px = 2309um > 22px = 500um, 4px = 100um
 		%\draw[|-|,blue,thick] (89,571) -- (787,576) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{16.12}{\milli\meter} (806px) TEMPORARY!};
-		\draw[|-|] (\x,\y) -- (\x+217,\y) node [midway,above] {\SI{5}{\milli\meter}};
+		\draw[|-|] (\x,\y) -- (\x+217/2,\y) node [midway,above] {\SI{5}{\milli\meter}};
 	\end{tikzpicture}%
 \end{frame}
 
@@ -517,41 +517,41 @@
     \begin{columns}
 		\begin{column}{0.33\paperwidth}
             \pgfmathsetlength{\imagewidth}{\imsize}%
-            \pgfmathsetlength{\imagescale}{\imagewidth/1620}%
-            \def\x{1001}% scalebar-x starting at golden ratio of image width of 1080px
-            \def\y{978}% scalebar-y at 90% of image height of 1620px
+            \pgfmathsetlength{\imagescale}{\imagewidth/535}%
+            \def\x{1001/3}% scalebar-x starting at golden ratio of image width of 1080px
+            \def\y{978/3}% scalebar-y at 90% of image height of 1620px
             \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
                 \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay,palindrome,width=\imsize]{24}{./img/movie_b09/b09_ctrl_d24t14_ir_rec0000_voi_0}{001}{501}};
                 % 618px = 6.18mm > 100px = 1000um > 50px = 500um, 10px = 100um
                 %\draw[|-|,blue,thick] (0,346) -- (618,346) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{6.18}{\milli\meter} (618px) TEMPORARY!};
-                \draw[|-|] (\x,\y) -- (\x+100,\y) node [right] {\SI{1}{\milli\meter}};
+                \draw[|-|] (\x,\y) -- (\x+100/3,\y) node [right] {\SI{1}{\milli\meter}};
             \end{tikzpicture}%
             \centering Control
 		\end{column}
 		\begin{column}{0.33\paperwidth}
             \pgfmathsetlength{\imagewidth}{\imsize}%
-            \pgfmathsetlength{\imagescale}{\imagewidth/1620}%
-            \def\x{1001}% scalebar-x starting at golden ratio of image width of 1080px
-            \def\y{978}% scalebar-y at 90% of image height of 1620px		
+            \pgfmathsetlength{\imagescale}{\imagewidth/535}%
+            \def\x{1001/3}% scalebar-x starting at golden ratio of image width of 1080px
+            \def\y{978/3}% scalebar-y at 90% of image height of 1620px		
             \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
                 \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay,palindrome,width=\imsize]{24}{./img/movie_b18/b18_mrt_d24t14_rec0000_voi_0}{001}{501}};
                 %\spy [red] on (462,234) in node at (0,0) [anchor=north west];
                 % 762px = 7.62mm > 100px = 1000um > 50px = 500um, 10px = 100um
                 %\draw[|-|,blue,thick] (0,267) -- (762,267) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{7.62}{\milli\meter} (762px) TEMPORARY!};
-                \draw[|-|] (\x,\y) -- (\x+100,\y) node [right] {\SI{1}{\milli\meter}};
+                \draw[|-|] (\x,\y) -- (\x+100/3,\y) node [right] {\SI{1}{\milli\meter}};
             \end{tikzpicture}%
             \centering Microbeam
 		\end{column}
 		\begin{column}{0.33\paperwidth}
             \pgfmathsetlength{\imagewidth}{\imsize}%
-            \pgfmathsetlength{\imagescale}{\imagewidth/1620}%
-            \def\x{1001}% scalebar-x starting at golden ratio of image width of 1080px
-            \def\y{978}% scalebar-y at 90% of image height of 1620px		
+            \pgfmathsetlength{\imagescale}{\imagewidth/535}%
+            \def\x{1001/3}% scalebar-x starting at golden ratio of image width of 1080px
+            \def\y{978/3}% scalebar-y at 90% of image height of 1620px		
             \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
                 \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay,palindrome,width=\imsize]{24}{./img/movie_b68/b68_bb_d24t14_rec0000_voi_0}{001}{501}};
                 % 992px = 9.92mm > 100px = 1000um > 50px = 500um, 10px = 100um
                 %\draw[|-|,blue,thick] (0,320) -- (992,320) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{9.92}{\milli\meter} (992px) TEMPORARY!};
-                \draw[|-|] (\x,\y) -- (\x+100,\y) node [right] {\SI{1}{\milli\meter}};
+                \draw[|-|] (\x,\y) -- (\x+100/3,\y) node [right] {\SI{1}{\milli\meter}};
             \end{tikzpicture}%
             \centering Broadbeam
 		\end{column}
