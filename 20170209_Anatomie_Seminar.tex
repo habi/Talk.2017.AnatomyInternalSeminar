@@ -1,6 +1,7 @@
-%\documentclass[notes]{beamer}       % print frame + notes
-%\documentclass[notes=only]{beamer}   % only notes
-\documentclass{beamer}              % only frames
+%\documentclass[notes]{beamer}			% print frame + notes
+%\documentclass[notes=only]{beamer}		% only notes
+\documentclass{beamer}					% only frames
+%\documentclass[draft]{beamer}			% only frames, draft mode
 \usetheme[color=screen]{UniBern}
 
 \setbeameroption{show notes}
@@ -174,7 +175,7 @@
 				\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{img/Ebene_25}};
 				% 1949px = 20.0mm > 100px = 1026um > 49px = 500um, 10px = 100um
 				%\draw[|-|,blue,thick] (39,1222) -- (1722,239) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{20.0}{\milli\meter} (1949px) TEMPORARY!};
-				\draw[|-|, thick] (\x,\y) -- (\x+490,\y) node [midway,above] {\SI{5}{\milli\meter}};
+				\draw[|-|] (\x,\y) -- (\x+490,\y) node [midway,above] {\SI{5}{\milli\meter}};
 				\node [anchor=center] (cb) at (2000,0) {Cerebellum};
 				\draw [thick,double,draw=unibe,double=black] (cb.west) to [out=-180, in=0] (1482,144);
 				\node [anchor=center] (bs) at (2250,1500) {Brain stem};
@@ -326,11 +327,11 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay, palindrome, width=\imsize]{24}{./img/movie_tumor_20um/mouse_tumor_rec0}{001}{461}};
 		% 698px = 16.12mm > 100px = 2309um > 22px = 500um, 4px = 100um
 		%\draw[|-|,blue,thick] (89,571) -- (787,576) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{16.12}{\milli\meter} (806px) TEMPORARY!};
-		\draw[|-|, thick] (\x,\y) -- (\x+217,\y) node [midway,above] {\SI{5}{\milli\meter}};
+		\draw[|-|] (\x,\y) -- (\x+217,\y) node [midway,above] {\SI{5}{\milli\meter}};
 	\end{tikzpicture}%
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
 	\frametitle{Overview, Detail and 3View}
 	\renewcommand{\imsize}{0.5\linewidth}
 	\pgfmathsetlength{\imagewidth}{\imsize}%
@@ -341,7 +342,7 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/Mouse_Tumor_IR_rec00001610}};
 		% 7776px = 23.328mm > 100px = 300um > 167px = 500um, 33px = 100um
 		%\draw[|-|,blue,thick] (0,3888) -- (7776,3888) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{23.328}{\milli\meter} (7776px) TEMPORARY!};
-		\draw[|-|,white,thick] (\x,\y) -- (\x+1670,\y) node [midway,above] {\SI{5}{\milli\meter}};
+		\draw[|-|,white] (\x,\y) -- (\x+1670,\y) node [midway,above] {\SI{5}{\milli\meter}};
 		\node<3>[red,draw,circle,inner sep=6pt] (overview) at (1500,4160) {};
 	\end{tikzpicture}%
 	\pause
@@ -354,7 +355,7 @@
 		%\spy [red] on (3512,3512) in node at (0,0) [anchor=north west];
 		% 3812px = 1.906mm > 100px = 50um > 1000px = 500um, 200px = 100um
 		%\draw[|-|,blue,thick] (0,1906) -- (3812,1906) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{1.906}{\milli\meter} (3812px) TEMPORARY!};
-		\draw[|-|,white,thick] (\x,\y) -- (\x+1000,\y) node [midway,above] {\SI{500}{\micro\meter}};
+		\draw[|-|,white] (\x,\y) -- (\x+1000,\y) node [midway,above] {\SI{500}{\micro\meter}};
 		\node<3> (detail-1) at (2124,336) {};
 		\node<3> (detail-2) at (1470,3222) {};
 	\end{tikzpicture}%
@@ -364,7 +365,7 @@
 	\end{tikzpicture}
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
 	\frametitle{Overview, Detail and 3View}
 	\renewcommand{\imsize}{0.5\linewidth}
 	\pgfmathsetlength{\imagewidth}{\imsize}%
@@ -375,7 +376,7 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Overview}};
 	% 8192px = 0.9486336mm > 100px = 12um > 4318px = 500um, 864px = 100um
 	%\draw[|-|,blue,thick] (0,3507) -- (8192,3507) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.9486336}{\milli\meter} (8192px) TEMPORARY!};
-	\draw[|-|,white,thick] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};		\node<3>[red,draw,circle,inner sep=8pt] (overview) at (792,3280) {};
+	\draw[|-|,white] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};		\node<3>[red,draw,circle,inner sep=8pt] (overview) at (792,3280) {};
 \end{tikzpicture}%
 	\pause
 \pgfmathsetlength{\imagewidth}{\imsize}%
@@ -386,7 +387,7 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Detail}};;
 	% 8192px = 0.098304mm > 100px = 1um > 41667px = 500um, 8333px = 100um
 	%\draw[|-|,blue,thick] (0,4096) -- (8192,4096) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.098304}{\milli\meter} (8192px) TEMPORARY!};
-		\draw[|-|,white,thick] (\x,\y) -- (\x+833.3,\y) node [midway,above] {\SI{10}{\micro\meter}};
+		\draw[|-|,white] (\x,\y) -- (\x+833.3,\y) node [midway,above] {\SI{10}{\micro\meter}};
 		\node<3> (detail-2) at (4096,250) {};
 		\node<3> (detail-2) at (4096,8192-250) {};
 	\end{tikzpicture}%
@@ -396,7 +397,7 @@
 	\end{tikzpicture}
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
 	\frametitle{Overview, Detail and 3View}
 	\renewcommand{\imsize}{0.6\linewidth}
 	\pgfmathsetlength{\imagewidth}{\imsize}%
@@ -407,11 +408,11 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/3View_Registration}};
 		% 8192px = 0.9486336mm > 100px = 12um > 4318px = 500um, 864px = 100um
 		%\draw[|-|,blue,thick] (0,3507) -- (8192,3507) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{0.9486336}{\milli\meter} (8192px) TEMPORARY!};
-		\draw[|-|,white,thick] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};
+		\draw[|-|,white] (\x,\y) -- (\x+864,\y) node [midway,above] {\SI{100}{\micro\meter}};
 	\end{tikzpicture}%
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
 	\frametitle{Overview, Detail and 3View}
 	\renewcommand{\imsize}{0.5\linewidth}
 	\pgfmathsetlength{\imagewidth}{\imsize}%
@@ -422,18 +423,18 @@
 		\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{./img/fibrosis/uCT_Cube_with_3View_Registration_Average}};
 		% 3812px = 11.436mm > 100px = 300um > 167px = 500um, 33px = 100um
 		%\draw[|-|,blue,thick] (0,1906) -- (3812,1906) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{11.436}{\milli\meter} (3812px) TEMPORARY!};
-		\draw[|-|,white,thick] (\x,\y) -- (\x+1000,\y) node [midway,above] {\SI{500}{\micro\meter}};
+		\draw[|-|,white] (\x,\y) -- (\x+1000,\y) node [midway,above] {\SI{500}{\micro\meter}};
 	\end{tikzpicture}%
 \end{frame}
 
-\section{Assessing brain tumors nondestructively}
+\section{Quantitative assessment of brain tumor radiation\newline treatment}
 \label{sec:grenoble}
 \begin{frame}
 	\frametitle{Brain tumor radiation treatment}
 	\begin{itemize}
 		\item \emph{Problem:} Tumor angiogenesis/radiation therapy?
 		\pause
-		\item \emph{Solution:} Nondestructive imaging and assessment with \uct!
+		\item \emph{Solution:} Nondestructive imaging with \uct and quantitative assessment of tomographic data!
 		\item[]
 		\pause
 		\item Judah Folkman: \blockquote[\cite{Sherwood1971}]{Tumors that exist in the dormant state have not become vascularised.}
@@ -456,16 +457,16 @@
 	\begin{columns}
 		\begin{column}{0.5\linewidth}
 			\begin{itemize}
-		    	\item Induced tumors
-		    	\item 9L Gliosarcoma \cite{Bouchet2014}
-		    	\item Microbeam and broadbeam treatment vs.\ control
-		    	\item \uaf-filled brain vasculature
-		    	\item Nondestructive extraction of
-		    	\begin{itemize}
-		    		\item Vessel to tumor volume ratio
-		    		\item Vessel surface
-		    		\item Intra-tumoral microvessel density (IMD, \cite{Hasan2002})
-		    	\end{itemize}
+				\item Induced tumors
+				\item 9L Gliosarcoma \cite{Bouchet2014}
+				\item Microbeam and broadbeam treatment vs.\ control at three time points
+				\item \uaf-filled brain vasculature
+				\item Nondestructive extraction of
+				\begin{itemize}
+					\item Vascular density
+					\item Vessel surface
+					\item Intra-tumoral microvessel density (IMD, \cite{Hasan2002})
+				\end{itemize}
 			\end{itemize}
 		\end{column}
 		\renewcommand{\imsize}{1\linewidth}
@@ -513,18 +514,46 @@
 \begin{frame}
 	\frametitle{Rat brain tumors}
 	\renewcommand{\imsize}{\linewidth}
-	\begin{columns}
+    \begin{columns}
 		\begin{column}{0.33\paperwidth}
-			\animategraphics[autoplay,palindrome,width=\imsize]{12}{./img/movie_b09/b09_ctrl_d24t14_0}{001}{341}
-			\centering Control
+            \pgfmathsetlength{\imagewidth}{\imsize}%
+            \pgfmathsetlength{\imagescale}{\imagewidth/1620}%
+            \def\x{1001}% scalebar-x starting at golden ratio of image width of 1080px
+            \def\y{978}% scalebar-y at 90% of image height of 1620px
+            \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+                \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay,palindrome,width=\imsize]{24}{./img/movie_b09/b09_ctrl_d24t14_ir_rec0000_voi_0}{001}{501}};
+                % 618px = 6.18mm > 100px = 1000um > 50px = 500um, 10px = 100um
+                %\draw[|-|,blue,thick] (0,346) -- (618,346) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{6.18}{\milli\meter} (618px) TEMPORARY!};
+                \draw[|-|] (\x,\y) -- (\x+100,\y) node [right] {\SI{1}{\milli\meter}};
+            \end{tikzpicture}%
+            \centering Control
 		\end{column}
 		\begin{column}{0.33\paperwidth}
-			\animategraphics[autoplay,palindrome,width=\imsize]{12}{./img/movie_b18/b18_mrt_d24t14_0}{001}{341}
-		\centering Microbeam
+            \pgfmathsetlength{\imagewidth}{\imsize}%
+            \pgfmathsetlength{\imagescale}{\imagewidth/1620}%
+            \def\x{1001}% scalebar-x starting at golden ratio of image width of 1080px
+            \def\y{978}% scalebar-y at 90% of image height of 1620px		
+            \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+                \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay,palindrome,width=\imsize]{24}{./img/movie_b18/b18_mrt_d24t14_rec0000_voi_0}{001}{501}};
+                %\spy [red] on (462,234) in node at (0,0) [anchor=north west];
+                % 762px = 7.62mm > 100px = 1000um > 50px = 500um, 10px = 100um
+                %\draw[|-|,blue,thick] (0,267) -- (762,267) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{7.62}{\milli\meter} (762px) TEMPORARY!};
+                \draw[|-|] (\x,\y) -- (\x+100,\y) node [right] {\SI{1}{\milli\meter}};
+            \end{tikzpicture}%
+            \centering Microbeam
 		\end{column}
 		\begin{column}{0.33\paperwidth}
-			\animategraphics[autoplay,palindrome,width=\imsize]{12}{./img/movie_b68/b68_bb_d24t14_0}{001}{341}
-		\centering Broadbeam
+            \pgfmathsetlength{\imagewidth}{\imsize}%
+            \pgfmathsetlength{\imagescale}{\imagewidth/1620}%
+            \def\x{1001}% scalebar-x starting at golden ratio of image width of 1080px
+            \def\y{978}% scalebar-y at 90% of image height of 1620px		
+            \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+                \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\animategraphics[autoplay,palindrome,width=\imsize]{24}{./img/movie_b68/b68_bb_d24t14_rec0000_voi_0}{001}{501}};
+                % 992px = 9.92mm > 100px = 1000um > 50px = 500um, 10px = 100um
+                %\draw[|-|,blue,thick] (0,320) -- (992,320) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{9.92}{\milli\meter} (992px) TEMPORARY!};
+                \draw[|-|] (\x,\y) -- (\x+100,\y) node [right] {\SI{1}{\milli\meter}};
+            \end{tikzpicture}%
+            \centering Broadbeam
 		\end{column}
 	\end{columns}
 \end{frame}
