@@ -1,10 +1,7 @@
-%\documentclass[notes]{beamer}			% print frame + notes
-%\documentclass[notes=only]{beamer}		% only notes
-\documentclass{beamer}					% only frames
-%\documentclass[draft]{beamer}			% only frames, draft mode
+\documentclass{beamer}
 \usetheme[color=screen]{UniBern}
 
-\setbeameroption{show notes}
+%\setbeameroption{show notes}
 %\includeonlyframes{current}
 
 \usepackage{lmodern}
@@ -12,7 +9,7 @@
 \usepackage{microtype}
 \usepackage{textcomp}
 \usepackage[backend=biber, style=numeric, url=false, isbn=false, maxbibnames=1, sorting=none]{biblatex}
-\addbibresource{../../Documents/library.bib}
+    \addbibresource{../../Documents/library.bib}
 \usepackage{graphicx}
 \usepackage{tikz}
 	\usetikzlibrary{arrows.meta,shapes}
@@ -24,9 +21,6 @@
 \usepackage{xspace}
 \usepackage[normalem]{ulem}
 \usepackage{hyperref}
-
-% Fit the presentation to the window when first displayed
-\hypersetup{pdfstartview={Fit}}
 
 % Setup some often used commands
 \newcommand{\imsize}{\linewidth}
@@ -193,7 +187,7 @@
 
 \begin{frame}
 	\frametitle{Help for the Sekretariat}
-	\renewcommand{\imsize}{\linewidth}%
+	\renewcommand{\imsize}{0.618\linewidth}%
 		\animategraphics[autoplay,palindrome,width=\imsize]{24}{img/movie_spider_7um/spider_07um_rec00000}{001}{501}
 \end{frame}
 
@@ -306,7 +300,7 @@
 	\frametitle{Multimodal imaging: \uct and 3View, correlated imaging}
 	\renewcommand{\imsize}{0.25\linewidth}
 	\begin{itemize}
-		\item Fibrose grading should be done on ultra fine level \cite{Hubner2008}
+		\item Fibrosis grading should be done on ultra fine level \cite{Hubner2008}
 		\pause
 		\item \uct combined with serial block-face scanning electron microscopy (\href{http://www.gatan.com/products/sem-imaging-spectroscopy/3view-system}{3View})
 		\item Registration of datasets; from overview to ultrafine structure
@@ -438,7 +432,7 @@
 		\item[]
 		\pause
 		\item Judah Folkman: \blockquote[\cite{Sherwood1971}]{Tumors that exist in the dormant state have not become vascularised.}
-		\item Antiangiogenesis as tumor therapy
+		\item Anti-Angiogenesis as tumor therapy
 		\begin{itemize}
 			\item \href{https://clinicaltrials.gov/ct2/results?term=antiangiogenic}{\textgreater4000 clinical trials}
 			\item Results \sout{disappointing} unsatisfactory
@@ -526,7 +520,9 @@
                 %\draw[|-|,blue,thick] (0,346) -- (618,346) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{6.18}{\milli\meter} (618px) TEMPORARY!};
                 \draw[|-|] (\x,\y) -- (\x+100/3,\y) node [right] {\SI{1}{\milli\meter}};
             \end{tikzpicture}%
-            \centering Control
+            \centering
+
+            Control
 		\end{column}
 		\begin{column}{0.33\paperwidth}
             \pgfmathsetlength{\imagewidth}{\imsize}%
@@ -540,7 +536,9 @@
                 %\draw[|-|,blue,thick] (0,267) -- (762,267) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{7.62}{\milli\meter} (762px) TEMPORARY!};
                 \draw[|-|] (\x,\y) -- (\x+100/3,\y) node [right] {\SI{1}{\milli\meter}};
             \end{tikzpicture}%
-            \centering Microbeam
+            \centering
+
+            Microbeam
 		\end{column}
 		\begin{column}{0.33\paperwidth}
             \pgfmathsetlength{\imagewidth}{\imsize}%
@@ -553,7 +551,9 @@
                 %\draw[|-|,blue,thick] (0,320) -- (992,320) node [sloped,midway,above,fill=white,semitransparent,text opacity=1] {\SI{9.92}{\milli\meter} (992px) TEMPORARY!};
                 \draw[|-|] (\x,\y) -- (\x+100/3,\y) node [right] {\SI{1}{\milli\meter}};
             \end{tikzpicture}%
-            \centering Broadbeam
+            \centering
+
+            Broadbeam
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -582,7 +582,7 @@
 \begin{frame}
 	\frametitle{Summary}
 	\begin{itemize}
-		\item \uct is a powerful methoth to get both pretty and meaningful insight into a broad kind of samples
+		\item \uct is a powerful method to get both pretty and meaningful insight into a broad kind of samples
 		\item Non-destructiveness makes it a complementary method to established assessment methods (Stereology, SEM, Histology)
 		\item Three-dimensional, numerical data enables quantitative assessment of sample properties
 		\item[]
@@ -609,7 +609,7 @@
 
 \begin{frame}[allowframebreaks]
 	\frametitle{References}
-	\renewcommand*{\bibfont}{\tiny}
+	\renewcommand*{\bibfont}{\scriptsize}
 	\setbeamertemplate{bibliography item}{\insertbiblabel}
 	\printbibliography
 \end{frame}
